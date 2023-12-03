@@ -1,0 +1,11 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+$background-yellow: #FFFDCA;
+$main-orange: #FF5D39;
+$accent-blue: #006877;
+
+$colors: (
+    "background-yellow": $background-yellow,
+    "main-orange": $main-orange,
+    "accent-blue": $accent-blue,
+)

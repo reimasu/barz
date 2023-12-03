@@ -1,0 +1,58 @@
+h1 {
+    font-size: 140px;
+    font-family: 'Slackey', sans-serif;
+    color: #006877;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 5px;
+}
+
+h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 48px;
+    font-style: italic;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.btn {
+    transition: none;
+}
+
+.landing-style {
+    row-gap: 150px;
+}
+
+.landing-title-container {
+    column-gap: 100px;
+}
+
+.landing-button-container {
+    column-gap: 80px;
+}
+
+.landing-button {
+    width: 478px;
+    height: 100px;
+    border-radius: 30px;
+    border: 1px solid #000;
+    background: #FFF;
+    filter: drop-shadow(10px 17px 0px #FF5D39);
+
+    :hover {
+        width: 478px;
+        height: 100px;
+        border-radius: 30px;
+        border: 1px solid #000;
+        background: #FFF;
+        transition: none;
+        transform: none !important;
+     }
+}
+
+
+
+.landing-button h3 {
+    font-style: normal;
+    text-transform: none;
+}

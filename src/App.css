@@ -1,5 +1,18 @@
 .App {
   text-align: center;
+  background-color: #FFFDCA;
+}
+
+.App {
+  --dot-bg: #FFFDCA;
+  --dot-color: rgb(55, 55, 55);
+  --dot-size: 1px;
+  --dot-space: 20px;
+  height: 100vh;
+	background:
+		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+		var(--dot-color);
 }
 
 .App-logo {
