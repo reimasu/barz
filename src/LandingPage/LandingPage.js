@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom';
 import './LandingPage.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../scss/custom.scss';
 function LandingPage() {
     return(
         <div className='d-flex flex-column landing-style'>
@@ -10,12 +10,16 @@ function LandingPage() {
             </div>
 
             <div className='d-flex flex-row justify-content-center align-items-center landing-button-container'>
-                <button type="button" class="landing-button">
-                    <h3>Sign Up</h3>
-                </button>
-                <button type="button" class=" landing-button btn">
-                    <h3>Sign In</h3>
-                </button>
+                <Link to="/signup">
+                    <button type="button" class="landing-button btn">
+                        <h3>Sign Up</h3>
+                    </button>
+                </Link>
+                <Link to="/signin">
+                    <button type="button" class=" landing-button btn">
+                        <h3>Sign In</h3>
+                    </button>
+                </Link>
             </div>
         </div>
     )
