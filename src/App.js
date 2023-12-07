@@ -5,6 +5,7 @@ import NavBar from "./NavBar/NavBar";
 import SignIn from "./LoginPage/SignIn";
 import SignUp from "./LoginPage/SignUp";
 import LandingPage from "./LandingPage/LandingPage"
+import Feed from "./Feed/Feed";
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<LandingPage/>}/>
           <Route path="/signup"    element={<SignUp/>}/>
           <Route path="/signin"    element={<SignIn/>}/>
+          <Route path="/Barz/Home" element={<Feed/>}/>
           {/* <Route path="/Labs/*"   element={<Labs/>}/>
           <Route path="/Kanbas/*" element={<Kanbas/>}/> */}
         </Routes>
