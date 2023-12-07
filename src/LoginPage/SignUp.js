@@ -26,11 +26,16 @@ function SignUp () {
                 <div className="row w-100 pb-4">
                     <input className="form-control py-2" type="password" placeholder="Password"></input>
                 </div>
+                <div className="row w-100 pb-4" >
+                    <input type="checkbox" class="btn-check" id="btn-check-artist" checked autocomplete="off"></input>
+                    <label class="btn" for="btn-check-artist">Artist</label>
+                </div>
                 <div className="row w-100 pt-3">
                     <button type="button" className="btn py-2">
                         <p>Create Account</p>
                     </button>
                 </div>
+                
                 </div>
             </div>
         </div>

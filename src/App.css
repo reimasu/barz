@@ -3,6 +3,7 @@
   background-color: #FFFDCA;
   display: flex;
   flex-direction: row;
+  max-width: 100%
 }
 
 .App {
