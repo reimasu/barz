@@ -1,27 +1,24 @@
 import {HashRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
-import './App.css';
 import NavBar from "./NavBar/NavBar";
-import filterNav from "./filterNav";
+import SignIn from "./LoginPage/SignIn";
 import SignUp from "./LoginPage/SignUp";
 import LandingPage from "./LandingPage/LandingPage"
-import Feed from "./Feed/Feed";
-function App() {
+function filterNav() {
+  
 
   return (
     <div className="App">
       <HashRouter>
+      <NavBar /> 
       
         <Routes>
-          <Route index element={<LandingPage/>}/>
-          <Route path="/Nav"  element={<filterNav/>}/>
           <Route path="/signup"    element={<SignUp/>}/>
-           <Route path="/signin"    element={<SignIn/>}/>
-          <Route path="/Barz/Home" element={<Feed/>}/>
+          <Route path="/signin"    element={<SignIn/>}/>
         </Routes>
     </HashRouter>
     </div>
   );
 }
 
-export default App;
+export default filterNav;
