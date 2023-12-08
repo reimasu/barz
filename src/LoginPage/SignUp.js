@@ -96,7 +96,12 @@ function SignUp () {
                     </div>
                     <div className="col px-0 ps-3">
                         <div className="form-check radio-button-container text-start py-2">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="radio_artist"/>
+                            <input className="form-check-input" type="radio"
+                            value = {credentials.artist} 
+                            onChange= {(e) => setCredentials({
+                                ...credentials,
+                                artist: e.target.checked })}
+                            name="flexRadioDefault" id="radio_artist"/>
                             <label className="form-check-label " for="radio_artist">
                                 <p>Artist</p>
                             </label>
@@ -106,27 +111,10 @@ function SignUp () {
                 <div className="row w-100 pt-3">
                     <button type="button" className="btn py-2">
                         <p className="text-center text-black">Create Account</p>
-
-                <div className="row w-100 pb-4" >
-                    <input 
-                    value = {credentials.artist} 
-                    onChange= {(e) => setCredentials({
-                        ...credentials,
-                        artist: e.target.checked })}
-                    type="checkbox" 
-                    class="btn-check" 
-                    id="btn-check-artist" 
-                    checked autocomplete="off"></input>
-                    <label class="btn" for="btn-check-artist">Artist</label>
-                </div>
-                <div className="row w-100 pt-3">
-                    <button onClick={signup} type="button" className="btn py-2">
-                        <p>Create Account</p>
                     </button>
                 </div>
-                
-                </div>
             </div>
+        </div>
         </div>
     )
 }

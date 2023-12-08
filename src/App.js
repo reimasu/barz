@@ -3,7 +3,6 @@ import {Routes, Route} from "react-router";
 import './App.css';
 import NavBar from "./NavBar/NavBar";
 import filterNav from "./filterNav";
-import SignIn from "./LoginPage/SignIn";
 import SignUp from "./LoginPage/SignUp";
 import SignIn from "./LoginPage/SignIn";
 import LandingPage from "./LandingPage/LandingPage"
