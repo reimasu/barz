@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './SignInUp.css';
+import { useNavigate } from "react-router-dom";
+import * as client from "./client";
 
 function SignIn () {
+
+    const [credentials, setCredentials] = useState({ username: "", password: "" });
+    const navigate = useNavigate();
+    const signin = async () => {
+      await client.signin(credentials);
+      navigate("/Kanbas/account");
+    };
+
     return(
         <div className="d-flex flex-row justify-content-center align-items-center signin-container">
             <h1>Welcome back</h1>
