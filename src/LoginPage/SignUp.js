@@ -4,7 +4,7 @@ import './SignInUp.css';
 
 function SignUp () {
     return(
-        <div className="d-flex flex-row justify-content-center align-items-center signin-container">
+        <div className="d-flex flex-row signin-container">
             <h1>Welcome to BARZ</h1>
             <div className="d-flex flex-column align-items-start signin-form-container">
                 <h4>Sign Up</h4>
@@ -26,13 +26,27 @@ function SignUp () {
                 <div className="row w-100 pb-4">
                     <input className="form-control py-2" type="password" placeholder="Password"></input>
                 </div>
-                <div className="row w-100 pb-4" >
-                    <input type="checkbox" class="btn-check" id="btn-check-artist" checked autocomplete="off"></input>
-                    <label class="btn" for="btn-check-artist">Artist</label>
+                <div className="row w-100 pb-4">
+                    <div className="col pe-3 ps-0">
+                        <div className="form-check radio-button-container text-start py-2">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="radio_user"/>
+                            <label className="form-check-label" for="radio_user">
+                                <p>User</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div className="col px-0 ps-3">
+                        <div className="form-check radio-button-container text-start py-2">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="radio_artist"/>
+                            <label className="form-check-label " for="radio_artist">
+                                <p>Artist</p>
+                            </label>
+                        </div>
+                    </div>    
                 </div>
                 <div className="row w-100 pt-3">
                     <button type="button" className="btn py-2">
-                        <p>Create Account</p>
+                        <p className="text-center text-black">Create Account</p>
                     </button>
                 </div>
                 
