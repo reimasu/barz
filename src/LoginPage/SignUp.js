@@ -11,9 +11,9 @@ function SignUp () {
       _id: randomID.toString(), 
       username: "", 
       password: "", 
-      email: "",  
       firstName: "", 
       lastName: "", 
+      email: "",  
       artist: false});
     const navigate = useNavigate();
     const signup = async () => {
@@ -88,7 +88,12 @@ function SignUp () {
                 <div className="row w-100 pb-4">
                     <div className="col pe-3 ps-0">
                         <div className="form-check radio-button-container text-start py-2">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="radio_user"/>
+                            <input className="form-check-input" type="radio" 
+                            value = {credentials.artist} 
+                            onChange= {(e) => setCredentials({
+                                ...credentials,
+                                artist: false })}
+                            name="flexRadioDefault" id="radio_user"/>
                             <label className="form-check-label" for="radio_user">
                                 <p>User</p>
                             </label>
@@ -100,7 +105,7 @@ function SignUp () {
                             value = {credentials.artist} 
                             onChange= {(e) => setCredentials({
                                 ...credentials,
-                                artist: e.target.checked })}
+                                artist: true })}
                             name="flexRadioDefault" id="radio_artist"/>
                             <label className="form-check-label " for="radio_artist">
                                 <p>Artist</p>
@@ -109,7 +114,7 @@ function SignUp () {
                     </div>    
                 </div>
                 <div className="row w-100 pt-3">
-                    <button type="button" className="btn py-2">
+                    <button onClick = {signup} type="button" className="btn py-2">
                         <p className="text-center text-black">Create Account</p>
                     </button>
                 </div>
