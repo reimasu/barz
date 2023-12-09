@@ -1,3 +1,2 @@
-import { configureStore } from "@reduxjs/toolkit";
-
+import configureSto
 export default Store;

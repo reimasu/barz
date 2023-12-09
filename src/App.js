@@ -18,7 +18,7 @@ function App() {
           <HashRouter>
             <Routes>
               <Route index element={<LandingPage/>}/>
-              <Route path="/Nav"  element={<filterNav/>}/>
+              <Route path="/Nav"       element={<filterNav/>}/>
               <Route path="/signup"    element={<SignUp/>}/>
               <Route path="/signin"    element={<SignIn/>}/>
               <Route path="/Barz/Home" element={<Feed/>}/>
