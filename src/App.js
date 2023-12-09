@@ -1,12 +1,13 @@
 import {HashRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
-import './App.css';
 import FilterNav from "./FilterNav.js";
 import SignUp from "./LoginPage/SignUp";
 import SignIn from "./LoginPage/SignIn";
 import LandingPage from "./LandingPage/LandingPage"
 import Profile from "./Profile/Profile";
 import Feed from "./Feed/Feed";
+import './App.css';
+
 // import Store from "./Store";
 import { Provider } from "react-redux";
 

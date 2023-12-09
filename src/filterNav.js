@@ -4,11 +4,6 @@ import NavBar from "./NavBar/NavBar";
 import Feed from "./Feed/Feed";
 import Profile from "./Profile/Profile";
 function FilterNav() {
-import SignIn from "./LoginPage/SignIn";
-import SignUp from "./LoginPage/SignUp";
-import './App.css';
-import LandingPage from "./LandingPage/LandingPage"
-function filterNav() {
   return (
     <div className="filterNav">
 
