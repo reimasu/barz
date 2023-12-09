@@ -6,6 +6,9 @@ import SignUp from "./LoginPage/SignUp";
 import SignIn from "./LoginPage/SignIn";
 import LandingPage from "./LandingPage/LandingPage"
 import Profile from "./Profile/Profile";
+import Feed from "./Feed/Feed";
+// import Store from "./Store";
+import { Provider } from "react-redux";
 
 function App() {
 

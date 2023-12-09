@@ -3,7 +3,9 @@
   background-color: #FFFDCA;
   display: flex;
   flex-direction: row;
-  max-width: 100%
+  justify-content: center;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .App {
@@ -12,6 +14,7 @@
   --dot-size: 1px;
   --dot-space: 20px;
   height: 100vh;
+  width: 100%;
 	background:
 		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
 		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
