@@ -19,7 +19,7 @@ function SignUp () {
     const signup = async () => {
       try {
         await client.signup(credentials);
-        navigate("/LandingPage");
+        navigate("/Feed");
       } catch (err) {
         setError(err.response.data.message);
       }

@@ -5,22 +5,18 @@ import { useNavigate } from "react-router-dom";
 import * as client from "./client";
 
 function SignIn () {
-
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const handleLogin =  async () => {
-        if (!(username === ""&& password === "")) {
-            try {
-                await dispatch(loginThunk({username, password}));
-                if (!currentUser?._id) {
-                    setLoginState("failed");
-                    setPassword("")
-                }
-            } catch (e) {
-                console.log(e)
-            }
-        }
+    const [error, setError] = useState("");
+    const [credentials, setCredentials] = useState({ username: "", password: "" });
+    const navigate = useNavigate();
+    const signin = async () => {
+        try {
+            await client.signup(credentials);
+            navigate("/Feed");
+          } catch (err) {
+            setError(err.response.data.message);
+          }
     };
+
     return(
         <div className="d-flex flex-row justify-content-center align-items-center signin-container">
             <h1>Welcome back</h1>
@@ -33,8 +29,8 @@ function SignIn () {
                         id="username"
                         type="text" 
                         placeholder="Username"
-                        value={username}
-                        onChange={(e) => setEmail(e.target.value)}>
+                        value={credentials.username}
+                        onChange={(e) => setCredentials({...credentials, username: e.target.value})}>
                     </input>
                 </div>
                 <div className="row pb-4">
@@ -43,17 +39,17 @@ function SignIn () {
                     id="password"
                     type="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={credentials.password}
+                    onChange={(e) => setCredentials({...credentials, password: e.target.value})}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
-                            handleLogin();
+                            signin();
                         }
                     }}>
                     </input>
                 </div>
                 <div className="row pt-3">
-                    <button type="button" className="btn py-2">
+                    <button onClick = {signin} type="button" className="btn py-2">
                         <p>Login</p>
                     </button>
                 </div>
