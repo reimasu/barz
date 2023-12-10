@@ -1,0 +1,28 @@
+.explore-container {
+    width: 100%;
+}
+
+.headings {
+    color: #000;
+    font-family: Massilia;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    text-transform: none;
+    text-align: left;
+}
+
+.search-bar {
+    border-radius: 37.5px;
+    border: 1px solid #4D4D4D;
+    background: #FFF;
+}
+
+.search-album-cover {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);    
+}

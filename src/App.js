@@ -16,7 +16,6 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-
         <Routes>
           <Route index element={<LandingPage/>}/>
           <Route path="/signup"    element={<SignUp/>}/>
