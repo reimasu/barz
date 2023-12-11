@@ -2,6 +2,8 @@ import axios from "axios";
 import * as cheerio from 'cheerio';
 const GENIUS_API = "https://api.genius.com";
 export const API_KEY = process.env.REACT_APP_GENIUS_API_KEY;
+export const BASE_API = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
+export const USERS_API = `${BASE_API}/api/posts`;
 
 export const searchSong = async (searchTerm) => {
     try {const response = await axios.get(
@@ -46,3 +48,9 @@ export const getAlbumName = async (songResultId) => {
         console.error('Error in searchSong:', error);
     }
 };
+
+export const getAllPosts = async () => {
+    const response = await axios.get(`${USERS_API}`);
+    return response.data;
+  };
+    
