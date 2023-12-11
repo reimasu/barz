@@ -17,7 +17,7 @@ function Explore() {
     const obj = JSON.parse(JSON.stringify(results));
 
     return(
-        <div className='d-flex flex-column explore-container'>
+        <div className='d-flex flex-column explore-container ps-5'>
             <h3 className='headings'>Explore BARZs</h3>
             <hr/>
             <div className='grid'>
@@ -38,7 +38,7 @@ function Explore() {
                 </div>
                 <div className="row">
                     <h3 className="headings">Artists</h3>
-                    <ul className="list-group d-flex flex-row">
+                    <ul className="list-group d-flex flex-row flex-wrap">
                         {obj &&
                             obj.map((song, index) => (
                                 <li key={index} className="list-group-item">
@@ -50,9 +50,22 @@ function Explore() {
                                 </li>
                         ))}
                     </ul>
+                    <p>{console.log(obj)}</p>
                 </div>
                 <div className="row">
-                    <h3 className="headings">Artists</h3>
+                    <h3 className="headings">Songs</h3>
+                    <ul className="list-group d-flex flex-row flex-wrap">
+                        {obj &&
+                        obj.map((song, index) => (
+                            <li key={index} className="list-group-item">
+                                <Link to={`Song/${song.result.id}`}>
+                                    <img
+                                        className="search-song-cover"
+                                        src={song.result.song_art_image_url}></img>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </div>

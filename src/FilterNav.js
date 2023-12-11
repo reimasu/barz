@@ -4,7 +4,8 @@ import NavBar from "./NavBar/NavBar";
 import Feed from "./Feed/Feed";
 import Explore from "./Explore/Explore";
 import Profile from "./Profile/Profile";
-import './FilterNav.css'
+import './FilterNav.css';
+import Song from "./Explore/Song/Song";
 function FilterNav() {
   return (
     <div className="filterNav">
@@ -13,6 +14,7 @@ function FilterNav() {
         <Routes>
           <Route path="/Barz/Home" element={<Feed/>}/>
           <Route path="/Barz/Explore" element={<Explore/>}/>
+          <Route path="/Barz/Explore/Song/:songResultId" element={<Song/>}/>
         </Routes>
     </div>
   );
