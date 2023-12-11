@@ -15,6 +15,11 @@ function Feed() {
         setResults(results);
     }
 
+    const getUsernameFromId = async (userId) => {
+        const user = await client.getUserFromId(userId);
+        return user.username;
+    }
+
     useEffect(() => {
         allPosts();
     }, []);
@@ -36,16 +41,25 @@ function Feed() {
                             </div>
                         <div className='col-8'>
                             <div className='row justify-content-between py-3'>
-                                <p className='col text-start'>@{post.userId}</p>
+                                <p className='col text-start'>
+                                    {console.log(getUsernameFromId(post.userId))};
+                                    {/* @{getUsernameFromId(post.userId)} */}
+                                </p>
                                 <h6 className='col text-end'>Posted on: {post.timestamp}</h6>
                             </div>
                             <div className='row text-start py-3'>
                                 <p className='fw-normal'>“{post.lyric}”</p>
                             </div>
                             <div className='row-3 justify-content-end text-end pb-3'>
-                                <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
-                                <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
-                                <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faPlus}></FontAwesomeIcon>
+                                <Link >
+                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
+                                </Link>
+                                <Link>
+                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
+                                </Link> 
+                                <Link>
+                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faPlus}></FontAwesomeIcon>
+                                </Link>
                             </div>
                         </div>
                     </div>
