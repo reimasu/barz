@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import * as cheerio from 'cheerio';
 const GENIUS_API = "https://api.genius.com";
 export const API_KEY = process.env.REACT_APP_GENIUS_API_KEY;
 

@@ -1,13 +1,16 @@
 import { useParams } from "react-router-dom";
 import React, {useState, useEffect} from "react";
+
 import * as client from "../../Search/client";
 import './Song.css'
+
 function Song() {
     const {songResultId} = useParams();
     const [results, setResults] = useState(null);
     const [title, setTitle] = useState([]);
     const [albumCover, setAlbumCover] = useState([]);
     const [albumName, setAlbumName] = useState([]);
+    const [songLyric, setSongLyric] = useState([]);
 
     const fetchSongTitle = async () => {
         const title = await client.getSongTitle(songResultId);
@@ -23,6 +26,7 @@ function Song() {
         const albumName = await client.getAlbumName(songResultId);
         setAlbumName(albumName)
     }
+
     useEffect(() => {
         fetchSongTitle(songResultId);
         fetchSongCover(songResultId);
@@ -39,13 +43,11 @@ function Song() {
                 <img 
                     className="col album-song-page"
                     src={albumCover}></img>
-                    <div className="col">
+                    <div className="col album-details">
                         <h3 className="text-start">{title}</h3>
                         <h4 className="text-start">On album {albumName}</h4>
-                    </div>
-
+i                    </div>
             </div>
-
         </div>
     </div>
     )
