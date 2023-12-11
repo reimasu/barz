@@ -1,0 +1,11 @@
+p{
+    font-family: 'Poppins', sans-serif;
+    color: #000;
+    font-weight: bold;
+}
+.edit-btn{
+    background-color: #FF5D39;
+    width: 125px;
+    border: none;
+    padding: 10px;
+}

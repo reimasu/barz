@@ -8,7 +8,7 @@ import NavBarHor from '../ProfileNavBar/NavBarHor';
 import NavBarVer from '../ProfileNavBar/NavBarVer';
 // import * as client from "./LoginPage/client"; // will add this when we connect to node
 
-function Profile() {
+function YourBarz() {
 
     const [credentials, setCredentials] = useState({
         username: "",
@@ -63,4 +63,4 @@ function Profile() {
     )
 }
 
-export default Profile;
+export default YourBarz;
