@@ -7,6 +7,8 @@ import LandingPage from "./LandingPage/LandingPage"
 import Profile from "./Profile/Profile";
 import Feed from "./Feed/Feed";
 import YourBarz from "./Profile/YourBarz.js";
+import Followers from "./Profile/Followers.js";
+import Following from "./Profile/Following";
 import './App.css';
 
 // import Store from "./Store";
@@ -22,6 +24,8 @@ function App() {
           <Route path="/signin"    element={<SignIn/>}/>
           <Route path="/Barz/Profile"    element={<Profile/>}/>
           <Route path="/Barz/Your-Barz" element={<YourBarz/>}/>
+          <Route path="/Barz/Followers" element={<Followers/>}/>
+          <Route path="/Barz/Following" element={<Following/>}/>
           <Route path="/*"    element={<FilterNav/>}/>
         </Routes>
     </HashRouter>
