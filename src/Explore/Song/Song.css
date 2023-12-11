@@ -1,4 +1,4 @@
-h3 {
+.album-details h3 {
     color: #000;
     font-family: Anonymous Pro;
     font-size: 32px;
@@ -6,7 +6,7 @@ h3 {
     font-weight: 700;
     line-height: normal;
 }
-h4 {
+.album-details h4 {
     color: #000;
     text-align: center;
     font-family: Anonymous Pro;
@@ -15,6 +15,7 @@ h4 {
     font-weight: 400;
     line-height: normal;
 }
+
 
 .album-song-page {
     width: 250px;
