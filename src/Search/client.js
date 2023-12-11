@@ -8,7 +8,41 @@ export const searchSong = async (searchTerm) => {
     `${GENIUS_API}/search?q=${encodeURIComponent(searchTerm)}&access_token=${API_KEY}`
     );
     return response.data.response.hits;
-} catch (error) {
-    console.error('Error in searchSong:', error);
-}
+    } catch (error) {
+        console.error('Error in searchSong:', error);
+    }
+};
+
+export const getSongTitle = async (songResultId) => {
+    try {const response = await axios.get(
+    `${GENIUS_API}/songs/${encodeURIComponent(songResultId)}?access_token=${API_KEY}`
+    );
+    return response.data.response.song.title;
+    } catch (error) {
+        console.error('Error in searchSong:', error);
+    }
+};
+
+export const getSongCover = async (songResultId) => {
+    try {const response = await axios.get(
+    `${GENIUS_API}/songs/${encodeURIComponent(songResultId)}?access_token=${API_KEY}`
+    );
+    return response.data.response.song.song_art_image_url;
+    } catch (error) {
+        console.error('Error in searchSong:', error);
+    }
+};
+
+export const getAlbumName = async (songResultId) => {
+    try {const response = await axios.get(
+    `${GENIUS_API}/songs/${encodeURIComponent(songResultId)}?access_token=${API_KEY}`
+    );
+    if (response.data.response.song.album.name) {
+        return response.data.response.song.album.name;
+    } else {
+        return "No Album"
+    }
+    } catch (error) {
+        console.error('Error in searchSong:', error);
+    }
 };
