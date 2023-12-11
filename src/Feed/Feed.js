@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Feed.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { faUserCircle, faFire, faMessage, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -15,8 +15,9 @@ function Feed() {
         setResults(results);
     }
 
-    allPosts();
-
+    useEffect(() => {
+        allPosts();
+    }, []);
     const obj = JSON.parse(JSON.stringify(results));
 
     return(
@@ -28,11 +29,11 @@ function Feed() {
                     obj.map((post) => (
                 <li className="list-group-item">
                     <div className='card feed-card'>
-                    <div className='row'>            
-                        <div className='col-2 pt-3'>
-                            <FontAwesomeIcon className="fa-2xl" icon={faUserCircle}>
-                            </FontAwesomeIcon>
-                        </div>
+                        <div className='row'>            
+                            <div className='col-2 pt-3'>
+                                <FontAwesomeIcon className="fa-2xl" icon={faUserCircle}>
+                                </FontAwesomeIcon>
+                            </div>
                         <div className='col-8'>
                             <div className='row justify-content-between py-3'>
                                 <p className='col text-start'>@{post.userId}</p>
