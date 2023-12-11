@@ -5,27 +5,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css'
 
 function NavBarHor() {
-    const icons = [,faUserCircle];
-    const links = ["Home", "Search"];
-    const { pathname } = useLocation();
+    const icons = [, , faUserCircle]; 
+    const links = ["Home", "Search", ""]; 
+    const { pathname } = useLocation(); 
+    
 
-    return(
-        <div className="d-flex flex-column">  
-            <div className="d-md-none d-lg-block b-sidebar b-nav">
-                {links.map((link, index) => (
-                    <Link
+    return (
+        <div className="d-flex justify-content-between align-items-center">
+            {links.map((link, index) => (
+                <Link
                     key={index}
                     to={`/Barz/${link}`}
-                    className={`nav-links list-group-item nav-item d-flex flex-row
-                    justify-content-left align-middle text-nowrap py-3 pe-3 ${pathname.includes(link) && "active"}`}>
-                    <FontAwesomeIcon className="fa-sm align-self-center px-4" icon={icons[index]} >
-                    </FontAwesomeIcon>
+                    className={`nav-links list-group-item nav-item d-flex align-items-center text-nowrap px-3 ${pathname.includes(link) && "active"}`}>
+                    <FontAwesomeIcon className="me-2" icon={icons[index]} size="2x" />
                     {link}
-                    </Link>
-                ))}
-            </div>
-        </div> 
-    )
+                </Link>
+            ))}
+        </div>
+    );
 }
 
 export default  NavBarHor;

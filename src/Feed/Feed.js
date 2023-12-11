@@ -1,17 +1,23 @@
-import { Link } from 'react-router-dom';
+import { Link,  useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Feed.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { faUserCircle, faFire, faMessage, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as client from "./client.js"
+import * as client from "../Search/client.js"
 
 function Feed() {
-
+    const { search } = useParams();
+    const [searchTerm, setSearchTerm] = useState(search);
     const [results, setResults] = useState(null);
+    const [posts, setPosts] = useState(null);
 
     const allPosts = async () => {
-        const results = await client.getAllPosts();
+        const posts = await client.getAllPosts();
+        setPosts(posts);
+    }
+    const fetchSongs = async () => {
+        const results = await client.searchSong(searchTerm);
         setResults(results);
     }
 
@@ -23,7 +29,7 @@ function Feed() {
     useEffect(() => {
         allPosts();
     }, []);
-    const obj = JSON.parse(JSON.stringify(results));
+    const objPosts = JSON.parse(JSON.stringify(posts));
 
     return(
         <div className='d-flex flex-column feed-center-container'>
@@ -62,11 +68,16 @@ function Feed() {
                                 </Link>
                             </div>
                         </div>
-                    </div>
-                    </div>   
-                </li>   
-                ))}       
-            </ul>
+                        </div>   
+                    </li>   
+                    ))}       
+                </ul>
+                <p>{console.log(objPosts)}</p>
+            </div>
+            <div className='col pt-3'>
+                <p>put trending songs here</p>
+            </div>
+            </div>
         </div>
     )
 }

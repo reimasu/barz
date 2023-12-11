@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './SignInUp.css';
-import { useNavigate } from "react-router-dom";
-import * as client from "./client";
+ import React, { useState } from "react";
+ import { useDispatch } from 'react-redux';
+ import 'bootstrap/dist/css/bootstrap.min.css';
+ import './SignInUp.css';
+ import { useNavigate } from "react-router-dom";
+ import * as client from "./client";
 
-function SignIn () {
+ function SignIn () {
 
     const [error, setError] = useState("");
     const [credentials, setCredentials] = useState({ 

@@ -6,10 +6,10 @@ import SignIn from "./LoginPage/SignIn";
 import LandingPage from "./LandingPage/LandingPage"
 import Profile from "./Profile/Profile";
 import Feed from "./Feed/Feed";
+import YourBarz from "./Profile/YourBarz.js";
 import './App.css';
 
 // import Store from "./Store";
-import { Provider } from "react-redux";
 
 function App() {
 
@@ -21,6 +21,7 @@ function App() {
           <Route path="/signup"    element={<SignUp/>}/>
           <Route path="/signin"    element={<SignIn/>}/>
           <Route path="/Barz/Profile"    element={<Profile/>}/>
+          <Route path="/Barz/Your-Barz" element={<YourBarz/>}/>
           <Route path="/*"    element={<FilterNav/>}/>
         </Routes>
     </HashRouter>

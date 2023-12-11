@@ -6,9 +6,10 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavBarHor from '../ProfileNavBar/NavBarHor';
 import NavBarVer from '../ProfileNavBar/NavBarVer';
+import BarzCard from './BarzCard';
 // import * as client from "./LoginPage/client"; // will add this when we connect to node
 
-function Profile() {
+function YourBarz() {
 
     const [credentials, setCredentials] = useState({
         username: "",
@@ -38,24 +39,16 @@ function Profile() {
                         <NavBarVer />
                     </div>
                     <div className=" col-2 w-75">
-                        <FontAwesomeIcon className="fa-10x" icon={faUserCircle}>
-                        </FontAwesomeIcon>
+                        <h3 className='headings'>4 Barz Posted</h3>
+                        <hr />
 
                         <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark font-weight-bold'> Name: </p>
+                            <BarzCard/>
+                            <BarzCard/>
+                            <BarzCard/>
+                            <BarzCard/>
                         </div>
-                        <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark'> Username: </p>
-                        </div>
-                        <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark'> Email: </p>
-                        </div>
-                        <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark'> Joined: </p>
-                        </div>
-                        <div className=" py-3 pe-3">
-                            <button type="button" className='edit-btn'>Edit</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -63,4 +56,4 @@ function Profile() {
     )
 }
 
-export default Profile;
+export default YourBarz;
