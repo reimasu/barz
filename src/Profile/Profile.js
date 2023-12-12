@@ -1,23 +1,34 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import './Profile.css'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavBarHor from '../ProfileNavBar/NavBarHor';
 import NavBarVer from '../ProfileNavBar/NavBarVer';
-// import * as client from "./LoginPage/client"; // will add this when we connect to node
+import * as client from "../LoginPage/client"; 
 
 function Profile() {
+    const [gettingUserById, setGetUserId] = useState(null);
+    const { id } = useParams();
+    const getUserById = async (id) => {
+        const user = await client.getUserById(id);
+        setGetUserId(user);
+      };    
 
-    const [credentials, setCredentials] = useState({
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        artist: false
-    });
+      const fetchProfile = async () => {
+        const getUserById = await client.getUserById();
+        setGetUserId(getUserById);
+    };
+
+    useEffect(() => {
+        if (id) {
+            gettingUserById(id);
+          } else {
+            fetchProfile();
+          }
+    }, []);
+
 
     return (
 
@@ -32,31 +43,32 @@ function Profile() {
                     </div>
                 </div>
             </div>
+
             <div className='container py-3'>
                 <div className='row'>
                     <div className='col-sm-2 p-2'>
                         <NavBarVer />
                     </div>
+                    {getUserById && (
                     <div className=" col-2 w-75">
+                    
                         <FontAwesomeIcon className="fa-10x" icon={faUserCircle}>
                         </FontAwesomeIcon>
 
                         <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark font-weight-bold'> Name: </p>
+                            <p className='text-dark font-weight-bold'> Name: {getUserById.firstName}</p>
                         </div>
                         <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark'> Username: </p>
+                            <p className='text-dark'> Username: {getUserById.username}</p>
                         </div>
                         <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark'> Email: </p>
-                        </div>
-                        <div className="row w-100 py-3 pe-3">
-                            <p className='text-dark'> Joined: </p>
+                            <p className='text-dark'> Email: {getUserById.email}</p>
                         </div>
                         <div className=" py-3 pe-3">
                             <button type="button" className='edit-btn'>Edit</button>
                         </div>
                     </div>
+                     )}
                 </div>
             </div>
         </div>
