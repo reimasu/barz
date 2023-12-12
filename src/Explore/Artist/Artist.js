@@ -7,7 +7,7 @@ function Artist() {
     const {artistResultId} = useParams();
     const [artistName, setArtistName] = useState([]);
     const [artistCover, setArtistCover] = useState([]);
-    const [results, setResults] = useState(null);
+    const [results, setResults] = useState([]);
 
 
     const fetchArtistName = async () => {
@@ -29,8 +29,8 @@ function Artist() {
         fetchArtistName(artistResultId);
         fetchArtistCover(artistResultId);
         fetchSongs(artistName);
-    }, []);
-
+    }, [results]);
+    
     const obj = JSON.parse(JSON.stringify(results));
 
     return (
@@ -60,7 +60,7 @@ function Artist() {
                         </ul>
                     </div> 
                 </div>
-            </div> 
+            </div>
         </div>
     );
 }
