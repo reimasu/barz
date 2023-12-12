@@ -40,14 +40,14 @@
 
 .make-barz-button:hover {
     background-color: white;
-    border: 1px solid black;
+    border: 2px solid black;
     color: black;
     border-radius: 0;
 }
 
 .close-barz-button:hover {
     background-color: white;
-    border: 1px solid black;
+    border: 2px solid black;
     color: black;
     border-radius: 0;
 }
