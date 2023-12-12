@@ -1,23 +1,16 @@
 import { Link } from 'react-router-dom';
 import './Profile.css'
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavBarHor from '../ProfileNavBar/NavBarHor';
 import NavBarVer from '../ProfileNavBar/NavBarVer';
 import FollowingCard from './FollowingCard';
 
 
+
 function Following(){
-    const [credentials, setCredentials] = useState({
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        artist: false
-    });
+    
 
     return(
         <div className=" d-flex flex-column feed-center-container py-4">
