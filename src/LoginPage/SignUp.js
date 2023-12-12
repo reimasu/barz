@@ -114,7 +114,7 @@ function SignUp () {
                     </div>    
                 </div>
                 <div className="row w-100 pt-3">
-                    <button onClick = {signup} type="button" className="btn py-2">
+                    <button onClick = {signup} type="button" className="btn signinup-button py-2">
                         <p className="text-center text-black">Create Account</p>
                     </button>
                 </div>

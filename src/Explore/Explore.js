@@ -42,7 +42,7 @@ function Explore() {
                         {obj &&
                             obj.map((song, index) => (
                                 <li key={index} className="list-group-item">
-                                    <Link to="/signin">
+                                    <Link to={`Artist/${song.result.primary_artist.id}`}>
                                         <img 
                                             className="search-album-cover"
                                             src={song.result.primary_artist.image_url}></img>
