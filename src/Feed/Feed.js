@@ -21,6 +21,15 @@ function Feed() {
         setResults(results);
     }
 
+    const time = (timestamp) => {
+        const date = new Date(timestamp);
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const formattedDate = `${year}-${month}-${day}`;
+        return formattedDate;
+    }
+
     useEffect(() => {
         allPosts();
     }, []);
@@ -45,7 +54,7 @@ function Feed() {
                             <div className='col-8'>
                                 <div className='row justify-content-between py-3'>
                                     <p className='col text-start'>@{post.username}</p>
-                                    <h6 className='col text-end'>Posted on: {post.timestamp}</h6>
+                                    <h6 className='col text-end'>Posted on: {time(post.timestamp)}</h6>
                                 </div>
                                 <div className='row text-start py-3'>
                                     <p className='fw-normal'>“{post.lyric}”</p>
