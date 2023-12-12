@@ -11,12 +11,12 @@ function LandingPage() {
 
             <div className='d-flex flex-row justify-content-center align-items-center landing-button-container'>
                 <Link to="/signup">
-                    <button type="button" class="landing-button btn">
+                    <button type="button" className="landing-button btn">
                         <h3>Sign Up</h3>
                     </button>
                 </Link>
                 <Link to="/signin">
-                    <button type="button" class="landing-button btn">
+                    <button type="button" className="landing-button btn">
                         <h3>Sign In</h3>
                     </button>
                 </Link>

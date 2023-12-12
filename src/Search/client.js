@@ -4,7 +4,10 @@ const GENIUS_API = "https://api.genius.com";
 export const API_KEY = process.env.REACT_APP_GENIUS_API_KEY;
 export const BASE_API = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
 export const USERS_API = `${BASE_API}/api/posts`;
-
+const request = axios.create({
+    withCredentials: true,
+  });
+  
 export const searchSong = async (searchTerm) => {
     try {const response = await axios.get(
     `${GENIUS_API}/search?q=${encodeURIComponent(searchTerm)}&access_token=${API_KEY}`
@@ -69,6 +72,10 @@ export const getAlbumName = async (songResultId) => {
     }
 };
 
+export const createPost = async (post) => {
+    const response = await request.post(`${USERS_API}`, post);
+    return response.data; };
+    
 export const getAllPosts = async () => {
     const response = await axios.get(`${USERS_API}`);
     return response.data;
