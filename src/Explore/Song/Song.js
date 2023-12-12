@@ -30,13 +30,13 @@ function Song() {
     useEffect(() => {
         fetchSongTitle(songResultId);
         fetchSongCover(songResultId);
-        fetchAlbumName(songResultId)
+        fetchAlbumName(songResultId);
     }, []);
 
 
     return(
         <div className='d-flex flex-column explore-container ps-5'>
-        <h3 className='headings'>Explore BARZs</h3>
+        <h3 className='headings'>{title}</h3>
         <hr/>
         <div className="grid">
             <div className="row">
@@ -45,7 +45,7 @@ function Song() {
                     src={albumCover}></img>
                     <div className="col album-details">
                         <h3 className="text-start">{title}</h3>
-                        <h4 className="text-start">On album {albumName}</h4>
+                        <h4 className="text-start"><b>On album:</b> {albumName}</h4>
 i                    </div>
             </div>
         </div>

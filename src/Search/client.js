@@ -25,6 +25,26 @@ export const getSongTitle = async (songResultId) => {
     }
 };
 
+export const getArtistName = async (artistResultId) => {
+    try { const response = await axios.get(
+        `${GENIUS_API}/artists/${encodeURIComponent(artistResultId)}?access_token=${API_KEY}`
+    );
+    return response.data.response.artist.name;
+    } catch (error) {
+        console.error("Error in searching:", error);
+    }
+}
+
+export const getArtistCover = async (artistResultId) => {
+    try { const response = await axios.get(
+        `${GENIUS_API}/artists/${encodeURIComponent(artistResultId)}?access_token=${API_KEY}`
+    );
+    return response.data.response.artist.image_url;
+    } catch (error) {
+        console.error("Error in searching:", error);
+    }
+}
+
 export const getSongCover = async (songResultId) => {
     try {const response = await axios.get(
     `${GENIUS_API}/songs/${encodeURIComponent(songResultId)}?access_token=${API_KEY}`
