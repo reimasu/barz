@@ -7,7 +7,7 @@ function Artist() {
     const {artistResultId} = useParams();
     const [artistName, setArtistName] = useState([]);
     const [artistCover, setArtistCover] = useState([]);
-    const [results, setResults] = useState(null);
+    const [results, setResults] = useState([]);
 
 
     const fetchArtistName = async () => {
@@ -30,7 +30,8 @@ function Artist() {
         fetchArtistName(artistResultId);
         fetchArtistCover(artistResultId);
         fetchSongs(artistName);
-    }, []);
+    }, [results]);
+    
     return (
     <div className='d-flex flex-column explore-container ps-5'>
             <h3 className='headings'>{artistName}</h3>
@@ -58,7 +59,7 @@ function Artist() {
                         </ul>
                     </div> 
                 </div>
-            </div> 
+            </div>
         </div>
     );
 }
