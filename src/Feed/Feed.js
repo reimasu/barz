@@ -44,7 +44,7 @@ function Feed() {
                                 </div>
                             <div className='col-8'>
                                 <div className='row justify-content-between py-3'>
-                                    <p className='col text-start'>@{post.userId}</p>
+                                    <p className='col text-start'>@{post.username}</p>
                                     <h6 className='col text-end'>Posted on: {post.timestamp}</h6>
                                 </div>
                                 <div className='row text-start py-3'>
