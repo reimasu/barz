@@ -9,7 +9,7 @@ export const signin = async (credentials) => {
 export const account = async () => {
     const response = await axios.post(`${USERS_API}/account`);
     return response.data;
-};
+}; // not using this anywhere it does same thing as getUserById
 
   export const signup = async (user) => {
     const response = await axios.post(`${USERS_API}/signup`, user);
@@ -20,6 +20,13 @@ export const account = async () => {
     const response = await axios.post(`${USERS_API}/signout`);
     return response.data;
   };
+
+  export const getUserById = async (user) => {
+    const response = await axios.get(`${USERS_API}/${user}`);
+    return response.data;
+  };
+
+
   
   
   
