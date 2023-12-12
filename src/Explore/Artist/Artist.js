@@ -2,8 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import React, {useState, useEffect} from "react";
 import * as client from "../../Search/client";
 import './Artist.css';
-
-function Artist() {
+  
+function Artist() {  
     const {artistResultId} = useParams();
     const [artistName, setArtistName] = useState([]);
     const [artistCover, setArtistCover] = useState([]);
@@ -21,16 +21,18 @@ function Artist() {
     }
     
     const fetchSongs = async () => {
-        const results = await client.searchSong(artistName);
-        setResults(results);
+        const r = await client.searchSong(artistName);
+        setResults(r);
     }
-    const obj = JSON.parse(JSON.stringify(results));
 
     useEffect(() => { 
         fetchArtistName(artistResultId);
         fetchArtistCover(artistResultId);
         fetchSongs(artistName);
     }, []);
+
+    const obj = JSON.parse(JSON.stringify(results));
+
     return (
     <div className='d-flex flex-column explore-container ps-5'>
             <h3 className='headings'>{artistName}</h3>
