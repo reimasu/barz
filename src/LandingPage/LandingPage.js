@@ -16,7 +16,7 @@ function LandingPage() {
                     </button>
                 </Link>
                 <Link to="/signin">
-                    <button type="button" class=" landing-button btn">
+                    <button type="button" class="landing-button btn">
                         <h3>Sign In</h3>
                     </button>
                 </Link>
