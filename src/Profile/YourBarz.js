@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import './Profile.css'
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
 import NavBarHor from '../ProfileNavBar/NavBarHor';
 import NavBarVer from '../ProfileNavBar/NavBarVer';
-import BarzCard from './BarzCard';
+import { Card } from "react-bootstrap";
 // import * as client from "./LoginPage/client"; // will add this when we connect to node
 
 function YourBarz() {
@@ -22,31 +22,33 @@ function YourBarz() {
 
     return (
 
-        <div className=" d-flex flex-column feed-center-container py-4">
-            <div className='container'>
-                <div className='row pe-3 pb-3'>
-                    <div className='col-md-9'>
-                        <h2 className="barz_logo">Barz</h2>
-                    </div>
-                    <div className='col-md-1'>
-                        <NavBarHor />
-                    </div>
-                </div>
+        <div className=" d-flex flex-col profile-container">
+            <div >
+                    <NavBarVer />
             </div>
-            <div className='container py-3'>
-                <div className='row'>
-                    <div className='col-sm-2 p-2'>
-                        <NavBarVer />
-                    </div>
-                    <div className=" col-2 w-75">
+            <div className='container m-0 profile-info-container'>
+                <div className="row align-items-end">
+                    <NavBarHor />
+                </div>
+                <div className='row pt-3 px-5'>
+                    <div className=" col">
                         <h3 className='headings'>4 Barz Posted</h3>
                         <hr />
-
-                        <div className="row w-100 py-3 pe-3">
-                            <BarzCard/>
-                            <BarzCard/>
-                            <BarzCard/>
-                            <BarzCard/>
+                        <div className="row w-100 py-3 px-3">
+                            <div className='grid'>
+                                <Card className="barz-card m-0">
+                                    <Card.Body>
+                                        <Card.Title className='fw-normal'><p className='text-nowrap'>Blah Blah Blah Blah</p></Card.Title>
+                                        <div className="icon-footer">
+                                        <Card.Text className="card-text"><h6>Posted on: 00/00/00</h6></Card.Text>
+                                        <div className="icons">
+                                        <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faTrash}></FontAwesomeIcon>
+                                        <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faPencil}></FontAwesomeIcon>
+                                        </div>
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </div>
                         </div>
                         
                     </div>
