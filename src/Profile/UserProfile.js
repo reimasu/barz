@@ -10,40 +10,30 @@ import * as client from "./client";
 
 function UserProfile() {
     const { userId } = useParams();
-    const [userProfile, setUserProfile] = useState(null);
+    const [userProfile, setUserProfile] = useState(false);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
                 const user = await client.getUserById(userId);
-                setUserProfile(user);
+                setUserProfile(true);
             } catch (error) {
                 console.error('Error fetching user profile:', error);
             }
         };
-
         fetchUserProfile();
     }, [userId]);
 
     return (
 
-        <div className=" d-flex flex-column feed-center-container py-4">
-            <div className='container'>
-                <div className='row pe-3 pb-3'>
-                    <div className='col-md-9'>
-                        <h2 className="barz_logo">Barz</h2>
-                    </div>
-                    <div className='col-md-1'>
-                        <NavBarHor />
-                    </div>
-                </div>
+        <div className=" d-flex flex-col profile-container">
+            <div>
+                <NavBarVer />
             </div>
-
-
-            <div className='container py-3'>
-                <div className='row'>
-                    <div className='col-sm-2 p-2'>
-                        <NavBarVer />
+            <div className='container m-0 profile-info-container'>
+                <div className='row align-items-end'>
+                    <div className="row align-items-end">
+                        <NavBarHor />
                     </div>
                     <div className=" col-2 w-75">
                         {userProfile && (<div>
@@ -59,15 +49,11 @@ function UserProfile() {
                             <button type="button" className='edit-btn'
                                 >Report</button>
 
-
-
-
                         </div>)}
                     </div>
 
                 </div>
             </div>
-
         </div>
 
     )
