@@ -27,6 +27,7 @@ function App() {
           <Route path="/Barz/Following/:userId" element={<Following />} />
           <Route path="/Barz/Profile" element={<Profile />} />
           <Route path="/Barz/Profile/:username" element={<UserProfile />} />
+          <Route path="/Barz/Profile/:userId" element={<UserProfile />} />
           <Route path="/Barz/Your-Barz" element={<YourBarz />} />
           <Route path="/Barz/Followers" element={<Followers />} />
           <Route path="/Barz/Following" element={<Following />} />
