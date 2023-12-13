@@ -32,23 +32,43 @@ function Profile() {
 
     return (
 
-        <div className=" d-flex flex-column feed-center-container py-4">
-            <div className='container'>
-                <div className='row pe-3 pb-3'>
-                    <div className='col-md-9'>
-                        <h2 className="barz_logo">Barz</h2>
-                    </div>
-                    <div className='col-md-1'>
+        <div className="d-flex flex-col profile-container">
+                <div >
+                    <NavBarVer />
+                </div>
+                <div className="container m-0 profile-info-container">
+                    <div className="row align-items-end">
                         <NavBarHor />
                     </div>
-                </div>
-            </div>
+                    <div className="row">
+                        {getUserById && (
+                        <div className=" col-2 w-75">
+                        
+                            <FontAwesomeIcon className="fa-10x" icon={faUserCircle}>
+                            </FontAwesomeIcon>
 
-            <div className='container py-3'>
-                <div className='row'>
-                    <div className='col-sm-2 p-2'>
-                        <NavBarVer />
+                            <div className="row w-100 py-3 pe-3">
+                                <p className='text-dark font-weight-bold'> Name: {getUserById.firstName}</p>
+                            </div>
+                            <div className="row w-100 py-3 pe-3">
+                                <p className='text-dark'> Username: {getUserById.username}</p>
+                            </div>
+                            <div className="row w-100 py-3 pe-3">
+                                <p className='text-dark'> Email: {getUserById.email}</p>
+                            </div>
+                            <div className=" py-3 pe-3">
+                                <button type="button" className='edit-btn'>Edit</button>
+                            </div>
+                        </div>
+                        )}
                     </div>
+                    
+                </div>
+                
+
+            {/* <div className='container py-3'>
+                <div className='row'>
+                    
                     {getUserById && (
                     <div className=" col-2 w-75">
                     
@@ -70,7 +90,7 @@ function Profile() {
                     </div>
                      )}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

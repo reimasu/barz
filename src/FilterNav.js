@@ -10,7 +10,6 @@ import Artist from "./Explore/Artist/Artist";
 function FilterNav() {
   return (
     <div className="filterNav">
-
       <NavBar /> 
         <Routes>
           <Route path="/Barz/Home" element={<Feed/>}/>
