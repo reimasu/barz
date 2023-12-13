@@ -197,65 +197,25 @@ const fetchAndToggleComments = async (postId) => {
                                 </div>
 
                                 <div className='row-3 justify-content-end text-end pb-3'>
-                                <Button className="p-0 pe-3 comment-icon" 
-                                    onClick={() => {
-                                        handleShow();
-                                    }}
-                                                     aria-controls="example-collapse-text"
-                                                     aria-expanded={open}>
-                                    <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faPlus}></FontAwesomeIcon>
-                                    </Button>
-                                    <Modal show={show} onHide={handleClose}>
-                                        <Modal.Header closeButton>
-                                        <Modal.Title><p>Type your comment for a post on <b>{title}</b></p></Modal.Title>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            <input 
-                                                type="text" 
-                                                class="form-control" 
-                                                placeholder="Write your fire comment..."
-                                                value = {postInfo.caption} 
-                                                onChange= {(e) => setPostInfo({
-                                                    ...postInfo,
-                                                    caption: e.target.value })}
-                                            />
-                                        </Modal.Body>
-                                    <Modal.Footer>
-                            <Button className="close-barz-button" variant="secondary" onClick={handleClose}>
-                                Close
-                            </Button>
-                            <Button 
-                                className="make-barz-button" 
-                                variant="primary" 
-                                onClick={() => {
-                                    // postComment();
-                                    handleClose();
-                                 }}>
-                                Post Comment
-                            </Button>
-                            </Modal.Footer>
-                        </Modal>
                                     
                                     <Button className="p-0 pe-3 comment-icon" 
                                     onClick={() => fetchAndToggleComments(post._id)}
                                     aria-controls={`comments-collapse-${post._id}`}
-                                    aria-expanded={openComments[post._id]} >
-                                    {/* // onClick={() => {
-                                    //     fetchComments(post._id);
-                                    //     console.log(comments);
-                                    //     setOpen(!open);
-                                    // }}
-                                    //                  aria-controls="example-collapse-text"
-                                    //                  aria-expanded={open}> */}
-                                    <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faMessage}></FontAwesomeIcon>
+                                    aria-expanded={openComments[post._id]} 
+                                    // onClick={() => {
+                                    //      fetchComments(post._id);
+                                    //      console.log(comments);
+                                    //      setOpen(!open);
+                                    //  }}
+                                    //                   aria-controls="example-collapse-text"
+                                    //                   aria-expanded={open}> 
+                                    ><FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faMessage}></FontAwesomeIcon>
                                     </Button>
                                     <FontAwesomeIcon className="fa-2xl orange-icon p-0 " icon={faFire}></FontAwesomeIcon>
                                 </div>
                             </div>
                             </div>
                         </div>
-                        {/* {objComments &&
-                        objComments.map((comment) => ( */}
                         <Collapse in={openComments[post._id]}>
                                 <div className='card feed-card' id="example-collapse-text">
                                 {commentsData[post._id] && commentsData[post._id].map((comment) => (
@@ -281,7 +241,6 @@ const fetchAndToggleComments = async (postId) => {
                                     ))}
                                 </div> 
                             </Collapse> 
-                            {/* ))}  */}
                         </li>
                         ))} 
                     </ul>
