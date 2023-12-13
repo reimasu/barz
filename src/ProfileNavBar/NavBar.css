@@ -23,3 +23,8 @@
     background: #FF5D39;
     width: 150px;
 }
+
+.nav-bar-ver {
+    width: 100%;
+    max-width: 100%;
+}

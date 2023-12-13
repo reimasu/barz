@@ -6,12 +6,14 @@ import './NavBar.css'
 
 function NavBarHor() {
     const icons = [, , faUserCircle]; 
+
     const links = ["Feed", "Search", ""]; 
+
     const { pathname } = useLocation(); 
     
 
     return (
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-end align-items-center py-4">
             {links.map((link, index) => (
                 <Link
                     key={index}

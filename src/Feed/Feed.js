@@ -1,4 +1,4 @@
-import { Link,  useParams } from 'react-router-dom';
+import { Link,  useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './Feed.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,6 +11,8 @@ function Feed() {
     const [searchTerm, setSearchTerm] = useState(search);
     const [results, setResults] = useState(null);
     const [posts, setPosts] = useState(null);
+
+    const navigate = useNavigate();
 
     const allPosts = async () => {
         const posts = await client.getAllPosts();
@@ -30,8 +32,43 @@ function Feed() {
         return formattedDate;
     }
 
+    const fetchLoggedInAccount = async () => {
+        const currentUser = await client.getLoggedInUser();
+        if (currentUser) {
+            console.log(currentUser);
+            setUserId(currentUser._id);
+        } else {
+            return null;
+        }
+        console.log(currentUser);
+    }
+
+    const randomID = Math.floor(Math.random() * 10000) + 1;
+    const [likeInfo, setLikeInfo] = useState({
+      _id: randomID.toString(), 
+      postId: "", 
+      likerId: "", 
+      timestamp: Date()});
+
+    const setUserId = (userId) => setLikeInfo({
+        ...likeInfo,
+        likerId: userId });
+
+    const setPostId = (pid) => setLikeInfo({
+            ...likeInfo,
+            postId: pid });
+
+    const setDate = () => setLikeInfo({
+        ...likeInfo,
+        timestamp: Date() });
+
+    const createOrDeleteLike = async () => {
+        await client.createOrDeleteLike(likeInfo);
+    };
+
     useEffect(() => {
         allPosts();
+        fetchLoggedInAccount();
     }, []);
     const objPosts = JSON.parse(JSON.stringify(posts));
 
@@ -60,11 +97,26 @@ function Feed() {
                                     <h6 className='col text-end'>Posted on: {time(post.timestamp)}</h6>
                                 </div>
                                 <div className='row text-start py-3'>
-                                    <p className='fw-normal'>“{post.lyric}”</p>
+                                    <p className='fw-normal'>“{post.caption}”</p>
+                                    <p className='fw-normal py-2'><b>Song Name:{post.songId}</b></p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
-                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
-                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
+                                    <button
+                                        onClick={() => {
+                                            if (fetchLoggedInAccount() === null) {
+                                                navigate("/");
+                                            } else {
+                                                console.log("post id is " + post._id);
+                                                setPostId(post._id);
+                                                setDate();
+                                                createOrDeleteLike();
+                                            }
+                                        }}>
+                                        <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
+                                    </button>
+                                    <button>
+                                        <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
+                                    </button>
                                 </div>
                             </div>
                         </div>

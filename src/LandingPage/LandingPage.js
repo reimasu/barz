@@ -21,6 +21,11 @@ function LandingPage() {
                     </button>
                 </Link>
             </div>
+            <div>
+                <Link to="/Barz/Feed">
+                    <p>Continue as Guest</p>
+                </Link>
+            </div>
         </div>
     )
 }

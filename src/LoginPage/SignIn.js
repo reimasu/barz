@@ -14,8 +14,14 @@
       const navigate = useNavigate();
       const signin = async () => {
         try {
-          await client.signin(credentials);
-          navigate("/Feed");
+         const user = await client.signin(credentials);
+        //   const user = await client.getUser();
+          console.log(user);
+          if(user && user._id){
+            navigate(`/Feed/${user._id}`);
+          } else {
+            console.error("error: user id not found");
+          }
         } catch (err) {
           setError(err.response.data.message);
         }

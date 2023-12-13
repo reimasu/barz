@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faUserCircle, faFire, faMessage } from "@fortawesome/free-solid-svg-icons";
@@ -28,6 +28,10 @@ function Song() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [open, setOpen] = useState(false);
+    const [posts, setPosts] = useState(null);
+    const [comments, setComments] = useState(null);
+
+    const navigate = useNavigate();
 
     const fetchSongTitle = async () => {
         const title = await client.getSongTitle(songResultId);
@@ -40,7 +44,11 @@ function Song() {
 
     const fetchLoggedInAccount = async () => {
         const currentUser = await client.getLoggedInUser();
-        setUsername(currentUser.username);
+        if (currentUser) {
+            setUsername(currentUser.username);
+        } else {
+            return null;
+        }
         console.log(currentUser);
     }
 
@@ -63,13 +71,26 @@ function Song() {
         await client.createPost(postInfo);
     };
 
+    const fetchPosts = async () => {
+        const posts = await client.getPostsFromSong(songResultId);
+        setPosts(posts);
+    }
+
+    const fetchComments = async (postId) => {
+        const comments = await client.getCommentsFromPost(postId);
+        setComments(comments);
+    }
+
     useEffect(() => {
         fetchSongTitle(songResultId);
         fetchSongCover(songResultId);
         fetchAlbumName(songResultId);
         fetchLoggedInAccount();
+        fetchPosts();
     }, []);
 
+    const objPosts = JSON.parse(JSON.stringify(posts));
+    const objComments = JSON.parse(JSON.stringify(comments));
 
     return(
         <div className='d-flex flex-column explore-container ps-5'>
@@ -90,7 +111,12 @@ function Song() {
                     <div className="row pt-3">
                         <Button
                             className="col-4 d-inline-flex gap-3 justify-content-center align-items-center make-barz-button"
-                            onClick={handleShow}
+                            onClick={() => {
+                                if (fetchLoggedInAccount() === null) {
+                                    navigate("/");
+                                }
+                                handleShow();
+                            }}
                             variant="primary">
                             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                             <p>Create Bar</p>
@@ -129,7 +155,9 @@ function Song() {
                 </div>
                 <div className="col">
                 <ul>
-                    <li className="list-group-item py-2">
+                {objPosts &&
+                        objPosts.map((post, index) => (
+                    <li key={index} className="list-group-item py-2">
                         <div className='card feed-card'>
                             <div className='row justify-content-center'>            
                                 <div className='col-3 pt-3'>
@@ -138,14 +166,59 @@ function Song() {
                                 </div>
                             <div className='col-8'>
                                 <div className='row justify-content-between py-3'>
-                                    <p className='col text-start'>@meow</p>
-                                    <h6 className='col text-end'>Posted on:</h6>
+                                    <p className='col text-start'>@{post.username}</p>
+                                    <h6 className='col text-end'>Posted on: {post.timestamp}</h6>
                                 </div>
                                 <div className='row text-start py-3'>
-                                    <p className='fw-normal'>“lyrics”</p>
+                                    <p className='fw-normal'>{post.caption}</p>
                                 </div>
+
                                 <div className='row-3 justify-content-end text-end pb-3'>
-                                    <Button className="p-0 pe-3 comment-icon" onClick={() => setOpen(!open)}
+                                <Button className="p-0 pe-3 comment-icon" 
+                                    onClick={() => {
+                                        handleShow();
+                                    }}
+                                                     aria-controls="example-collapse-text"
+                                                     aria-expanded={open}>
+                                    <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faPlus}></FontAwesomeIcon>
+                                    </Button>
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                        <Modal.Title><p>Type your comment for a post on <b>{title}</b></p></Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                placeholder="Write your fire comment..."
+                                                value = {postInfo.caption} 
+                                                onChange= {(e) => setPostInfo({
+                                                    ...postInfo,
+                                                    caption: e.target.value })}
+                                            />
+                                        </Modal.Body>
+                                    <Modal.Footer>
+                            <Button className="close-barz-button" variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button 
+                                className="make-barz-button" 
+                                variant="primary" 
+                                onClick={() => {
+                                    // postComment();
+                                    handleClose();
+                                 }}>
+                                Post Comment
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
+                                    
+                                    <Button className="p-0 pe-3 comment-icon" 
+                                    onClick={() => {
+                                        fetchComments(post._id);
+                                        console.log(comments);
+                                        setOpen(!open);
+                                    }}
                                                      aria-controls="example-collapse-text"
                                                      aria-expanded={open}>
                                     <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faMessage}></FontAwesomeIcon>
@@ -154,10 +227,10 @@ function Song() {
                                 </div>
                             </div>
                             </div>
-                        </div>   
-                        </li>
-                        <ul >
-                            <Collapse in={open}>
+                        </div>
+                        {objComments &&
+                        objComments.map((comment) => (
+                        <Collapse in={open}>
                                 <div className='card feed-card' id="example-collapse-text">
                                     <div className='row justify-content-center'>            
                                         <div className='col-3 pt-3'>
@@ -166,17 +239,18 @@ function Song() {
                                         </div>
                                         <div className='col-8'>
                                             <div className='row justify-content-between py-3'>
-                                                <p className='col text-start'>@meow</p>
-                                                <h6 className='col text-end'>Posted on:</h6>
+                                                <p className='col text-start'>@{comment.commenterId}</p>
+                                                <h6 className='col text-end'>Posted on: {comment.timestamp}</h6>
                                             </div>
                                             <div className='row text-start py-3'>
-                                                <p className='fw-normal'>“lyrics”</p>
+                                                <p className='fw-normal'>{comment.content}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div> 
-                            </Collapse>   
-                        </ul>   
+                            </Collapse> ))} 
+                        </li>
+                        ))} 
                     </ul>
                     
                 </div>
