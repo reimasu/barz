@@ -8,7 +8,7 @@ import Profile from "../Profile/Profile";
 
 function NavBar() {
     const icons = [faHouse, faMagnifyingGlass];
-    const links = ["Home", "Explore"];
+    const links = ["Feed", "Explore"];
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
@@ -37,7 +37,6 @@ function NavBar() {
                     {link}
                     </Link>
                 ))}
-                <button>
                 <Link
                     onClick = {() => {
                         if (fetchLoggedInAccount() === null) {
@@ -51,7 +50,6 @@ function NavBar() {
                     </FontAwesomeIcon>
                     Profile
                 </Link>
-                </button>
 
             </div>
         </div> 
