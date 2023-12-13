@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faUserCircle, faFire, faMessage } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +29,8 @@ function Song() {
     const handleShow = () => setShow(true);
     const [open, setOpen] = useState(false);
 
+    const navigate = useNavigate();
+
     const fetchSongTitle = async () => {
         const title = await client.getSongTitle(songResultId);
         setTitle(title);
@@ -40,7 +42,11 @@ function Song() {
 
     const fetchLoggedInAccount = async () => {
         const currentUser = await client.getLoggedInUser();
-        setUsername(currentUser.username);
+        if (currentUser) {
+            setUsername(currentUser.username);
+        } else {
+            return null;
+        }
         console.log(currentUser);
     }
 
@@ -90,7 +96,12 @@ function Song() {
                     <div className="row pt-3">
                         <Button
                             className="col-4 d-inline-flex gap-3 justify-content-center align-items-center make-barz-button"
-                            onClick={handleShow}
+                            onClick={() => {
+                                if (fetchLoggedInAccount() === null) {
+                                    navigate("/");
+                                }
+                                handleShow();
+                            }}
                             variant="primary">
                             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                             <p>Create Bar</p>

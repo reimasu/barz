@@ -1,13 +1,24 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { faHouse, faMagnifyingGlass, faBell, faList, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css'
+import * as client from "./../Search/client.js"
+import Profile from "../Profile/Profile";
 
 function NavBar() {
-    const icons = [faHouse, faMagnifyingGlass, faUserCircle];
-    const links = ["Home", "Explore", "Profile"];
+    const icons = [faHouse, faMagnifyingGlass];
+    const links = ["Home", "Explore"];
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+
+    const fetchLoggedInAccount = async () => {
+        const currentUser = await client.getLoggedInUser();
+        if (currentUser !== null) {
+            return null;
+        } 
+        console.log(currentUser);
+    }
 
     return(
         <div className="d-flex flex-column">  
@@ -26,6 +37,22 @@ function NavBar() {
                     {link}
                     </Link>
                 ))}
+                <button>
+                <Link
+                    onClick = {() => {
+                        if (fetchLoggedInAccount() === null) {
+                            navigate("/");
+                        }
+                    }}
+                    to={`/Barz/Profile`}
+                    className={`nav-links list-group-item nav-item d-flex flex-row
+                    justify-content-left align-middle text-nowrap py-3 pe-3 ${pathname.includes("Profile") && "active"}`}>
+                    <FontAwesomeIcon className="fa-sm align-self-center px-4" icon={faUserCircle} >
+                    </FontAwesomeIcon>
+                    Profile
+                </Link>
+                </button>
+
             </div>
         </div> 
     )
