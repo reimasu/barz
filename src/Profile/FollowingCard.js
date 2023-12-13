@@ -19,6 +19,7 @@ function FollowingCard() {
             console.log(err);
         }
       };
+      
 
     return (
         <Card className="canvas-course-card followers-card">
