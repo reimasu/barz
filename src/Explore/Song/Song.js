@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faUserCircle, faFire, faMessage } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +13,14 @@ import './Song.css'
 
 function Song() {
     const {songResultId} = useParams();
-    const [results, setResults] = useState(null);
+    const randomID = Math.floor(Math.random() * 10000) + 1;
+    const [postInfo, setPostInfo] = useState({
+        _id: randomID.toString(),
+        username: "", 
+        songId: songResultId, 
+        caption: "", 
+        lyric: "None",  
+        timestamp: Date()});
     const [title, setTitle] = useState([]);
     const [albumCover, setAlbumCover] = useState([]);
     const [albumName, setAlbumName] = useState([]);
@@ -22,9 +29,25 @@ function Song() {
     const handleShow = () => setShow(true);
     const [open, setOpen] = useState(false);
 
+    const navigate = useNavigate();
+
     const fetchSongTitle = async () => {
         const title = await client.getSongTitle(songResultId);
         setTitle(title);
+    }
+
+    const setUsername = (username) => setPostInfo({
+        ...postInfo,
+        username: username });
+
+    const fetchLoggedInAccount = async () => {
+        const currentUser = await client.getLoggedInUser();
+        if (currentUser) {
+            setUsername(currentUser.username);
+        } else {
+            return null;
+        }
+        console.log(currentUser);
     }
 
     const fetchSongCover = async () => {
@@ -37,11 +60,20 @@ function Song() {
         setAlbumName(albumName)
     }
     
+    const setDate = () => setPostInfo({
+        ...postInfo,
+        timestamp: Date() });
+
+    const createPost = async () => {
+        setDate();
+        await client.createPost(postInfo);
+    };
 
     useEffect(() => {
         fetchSongTitle(songResultId);
         fetchSongCover(songResultId);
         fetchAlbumName(songResultId);
+        fetchLoggedInAccount();
     }, []);
 
 
@@ -64,7 +96,12 @@ function Song() {
                     <div className="row pt-3">
                         <Button
                             className="col-4 d-inline-flex gap-3 justify-content-center align-items-center make-barz-button"
-                            onClick={handleShow}
+                            onClick={() => {
+                                if (fetchLoggedInAccount() === null) {
+                                    navigate("/");
+                                }
+                                handleShow();
+                            }}
                             variant="primary">
                             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                             <p>Create Bar</p>
@@ -74,13 +111,27 @@ function Song() {
                             <Modal.Title><p>Create a Bar for <b>{title}</b></p></Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <input type="text" class="form-control" placeholder="Write your fire Bar..."/>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Write your fire Bar..."
+                                    value = {postInfo.caption} 
+                                    onChange= {(e) => setPostInfo({
+                                        ...postInfo,
+                                        caption: e.target.value })}
+                                />
                             </Modal.Body>
                             <Modal.Footer>
                             <Button className="close-barz-button" variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button className="make-barz-button" variant="primary" onClick={handleClose}>
+                            <Button 
+                                className="make-barz-button" 
+                                variant="primary" 
+                                onClick={() => {
+                                    createPost();
+                                    handleClose();
+                                 }}>
                                 Create Bar
                             </Button>
                             </Modal.Footer>

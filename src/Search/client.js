@@ -3,7 +3,7 @@ import * as cheerio from 'cheerio';
 const GENIUS_API = "https://api.genius.com";
 export const API_KEY = process.env.REACT_APP_GENIUS_API_KEY;
 export const BASE_API = process.env.REACT_APP_BASE_API_URL || "http://localhost:4000";
-export const USERS_API = `${BASE_API}/api/posts`;
+export const USERS_API = `${BASE_API}/api`;
 const request = axios.create({
     withCredentials: true,
   });
@@ -73,11 +73,18 @@ export const getAlbumName = async (songResultId) => {
 };
 
 export const createPost = async (post) => {
-    const response = await request.post(`${USERS_API}`, post);
-    return response.data; };
+    console.log(post);
+    const response = await axios.post(`${USERS_API}/posts`, post);
+    return response.data; 
+};
     
 export const getAllPosts = async () => {
-    const response = await axios.get(`${USERS_API}`);
+    const response = await axios.get(`${USERS_API}/posts`);
     return response.data;
-  };
+};
+
+  export const getLoggedInUser = async () => {
+    const response = await axios.post(`${USERS_API}/users/profile`);
+    return response.data;
+};
     
