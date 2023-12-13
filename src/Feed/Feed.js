@@ -4,6 +4,8 @@ import './Feed.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { faUserCircle, faFire, faMessage, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Button from 'react-bootstrap/Button';
+
 import * as client from "../Search/client.js"
 
 function Feed() {
@@ -101,7 +103,8 @@ function Feed() {
                                     <p className='fw-normal py-2'><b>Song Name:{post.songId}</b></p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
-                                    <button
+                                    <Button
+                                        className="p-0 pe-3 comment-icon"
                                         onClick={() => {
                                             if (fetchLoggedInAccount() === null) {
                                                 navigate("/");
@@ -112,11 +115,11 @@ function Feed() {
                                                 createOrDeleteLike();
                                             }
                                         }}>
-                                        <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
-                                    </button>
-                                    <button>
-                                        <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
-                                    </button>
+                                        <FontAwesomeIcon className="fa-xl orange-icon" icon={faFire}></FontAwesomeIcon>
+                                    </Button>
+                                    <Button className="p-0 pe-3 comment-icon">
+                                        <FontAwesomeIcon className="fa-xl orange-icon" icon={faMessage}></FontAwesomeIcon>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
