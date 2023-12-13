@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 function NavBar() {
     const icons = [faHouse, faMagnifyingGlass];
-    const links = ["Home", "Explore"];
+    const links = ["Feed", "Explore"];
     const { pathname } = useLocation();
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState([]);
@@ -60,8 +60,6 @@ function NavBar() {
                     {link}
                     </Link>
                 ))}
-                {/* <button> */}
-                {booleanGuest ?  (
                     <Link
                         to={`/`}
                         className={`nav-links list-group-item nav-item d-flex flex-row

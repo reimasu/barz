@@ -87,4 +87,27 @@ export const getAllPosts = async () => {
     const response = await axios.post(`${USERS_API}/users/profile`);
     return response.data;
 };
+
+export const createOrDeleteLike = async (like) => {
+    console.log(like);
+    const response = await axios.get(`${USERS_API}/likes/${like.postId}/${like.likerId}`);
+    console.log(response);
+    if (response) {
+        const response2 = await axios.delete(`${USERS_API}/likes/${response.data._id}`);
+        return response2.data; 
+    } else {
+        const response3 = await axios.post(`${USERS_API}/likes`, like);
+        return response3.data; 
+    }
     
+};
+
+export const getPostsFromSong = async (songId) => {
+    const response = await axios.get(`${USERS_API}/posts/song/${songId}`);
+    return response.data;
+}; 
+
+export const getCommentsFromPost = async (postId) => {
+    const response = await axios.get(`${USERS_API}/comments/post/${postId}`);
+    return response.data;
+}; 
