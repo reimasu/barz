@@ -62,7 +62,9 @@ function Followers() {
         fetchFollowers();
     }, []);
 
-    return (                      <h3 className='headings'>{followers.length} Followers</h3>
+    return (        
+        <div>           
+         <h3 className='headings'>{followers.length} Followers</h3>
 
                         <h3 className='headings'>4 Followers</h3>
 
@@ -87,9 +89,6 @@ function Followers() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
     )
 }
 

@@ -31,6 +31,29 @@ function Song() {
     const [posts, setPosts] = useState(null);
     const [comments, setComments] = useState(null);
 
+    const [commentsData, setCommentsData] = useState({});
+    const [openComments, setOpenComments] = useState({});
+
+    const toggleComments = (postId) => {
+        console.log(postId);
+        setOpenComments(prevOpen => ({
+            ...prevOpen,
+            [postId]: !prevOpen[postId]
+        }));
+    };
+
+const fetchAndToggleComments = async (postId) => {
+    if (!commentsData[postId]) {
+        const comments = await client.getCommentsFromPost(postId);
+        console.log(comments);
+        setCommentsData(prevComments => ({
+            ...prevComments,
+            [postId]: comments
+        }));
+    }
+    toggleComments(postId);
+};
+
     const navigate = useNavigate();
 
     const fetchSongTitle = async () => {
@@ -76,10 +99,10 @@ function Song() {
         setPosts(posts);
     }
 
-    const fetchComments = async (postId) => {
-        const comments = await client.getCommentsFromPost(postId);
-        setComments(comments);
-    }
+    // const fetchComments = async (postId) => {
+    //     const comments = await client.getCommentsFromPost(postId);
+    //     setComments(comments);
+    // }
 
     useEffect(() => {
         fetchSongTitle(songResultId);
@@ -214,13 +237,16 @@ function Song() {
                         </Modal>
                                     
                                     <Button className="p-0 pe-3 comment-icon" 
-                                    onClick={() => {
-                                        fetchComments(post._id);
-                                        console.log(comments);
-                                        setOpen(!open);
-                                    }}
-                                                     aria-controls="example-collapse-text"
-                                                     aria-expanded={open}>
+                                    onClick={() => fetchAndToggleComments(post._id)}
+                                    aria-controls={`comments-collapse-${post._id}`}
+                                    aria-expanded={openComments[post._id]} >
+                                    {/* // onClick={() => {
+                                    //     fetchComments(post._id);
+                                    //     console.log(comments);
+                                    //     setOpen(!open);
+                                    // }}
+                                    //                  aria-controls="example-collapse-text"
+                                    //                  aria-expanded={open}> */}
                                     <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faMessage}></FontAwesomeIcon>
                                     </Button>
                                     <FontAwesomeIcon className="fa-2xl orange-icon p-0 " icon={faFire}></FontAwesomeIcon>
@@ -228,10 +254,11 @@ function Song() {
                             </div>
                             </div>
                         </div>
-                        {objComments &&
-                        objComments.map((comment) => (
-                        <Collapse in={open}>
+                        {/* {objComments &&
+                        objComments.map((comment) => ( */}
+                        <Collapse in={openComments[post._id]}>
                                 <div className='card feed-card' id="example-collapse-text">
+                                {commentsData[post._id] && commentsData[post._id].map((comment) => (
                                     <div className='row justify-content-center'>            
                                         <div className='col-3 pt-3'>
                                             <FontAwesomeIcon className="user-icon-comment" icon={faUserCircle}>
@@ -239,16 +266,22 @@ function Song() {
                                         </div>
                                         <div className='col-8'>
                                             <div className='row justify-content-between py-3'>
+                                                
+                                                <div key={comment._id}>
                                                 <p className='col text-start'>@{comment.commenterId}</p>
                                                 <h6 className='col text-end'>Posted on: {comment.timestamp}</h6>
-                                            </div>
+                                                
+                                                </div>
+                                                </div>
                                             <div className='row text-start py-3'>
                                                 <p className='fw-normal'>{comment.content}</p>
                                             </div>
                                         </div>
                                     </div>
+                                    ))}
                                 </div> 
-                            </Collapse> ))} 
+                            </Collapse> 
+                            {/* ))}  */}
                         </li>
                         ))} 
                     </ul>
