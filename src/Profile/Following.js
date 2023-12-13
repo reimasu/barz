@@ -5,9 +5,6 @@ import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBarHor from '../ProfileNavBar/NavBarHor';
 import NavBarVer from '../ProfileNavBar/NavBarVer';
-import FollowingCard from './FollowingCard';
-
-
 
 function Following(){
     
@@ -34,10 +31,7 @@ function Following(){
                         <hr />
 
                         <div className="row w-100 py-3 pe-3">
-                            <FollowingCard/>
-                            <FollowingCard/>
-                            <FollowingCard/>
-                            <FollowingCard/>
+                    
                            
                         </div>
                         
