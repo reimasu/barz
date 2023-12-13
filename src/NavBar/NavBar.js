@@ -43,8 +43,9 @@ function NavBar() {
         fetchLoggedInAccount();
         validUser();
         isGuest();
-    }, [booleanVar, booleanGuest])
+    }, [currentUser, booleanVar, booleanGuest])
 
+    {console.log(currentUser.artist)}
     {console.log(booleanGuest)}
     {console.log(booleanVar)}
     return(
