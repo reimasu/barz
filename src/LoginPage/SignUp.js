@@ -19,7 +19,15 @@ function SignUp () {
     const signup = async () => {
       try {
         await client.signup(credentials);
-        navigate("/Barz/Feed");
+        const user = await client.signin(credentials);
+        console.log(user);
+
+        if(user && user._id){
+            navigate(`/Barz/Feed/${user._id}`);
+        }
+        else {
+            console.error("error: user id not found");
+        }
       } catch (err) {
         setError(err.response.data.message);
       }
