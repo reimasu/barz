@@ -97,7 +97,7 @@ function Profile() {
                                     email: e.target.value
                                 })} />
                             <label htmlFor="role" className="form-label">User Role</label>
-                            <select id="role" className="form-control" onChange={(e) => setUser({
+                            <select id="role" value={user.artist ? "ARTIST" : "USER"} className="form-control" onChange={(e) => setUser({
                                 ...user,
                                 artist: e.target.value === "ARTIST"
                             })}>
