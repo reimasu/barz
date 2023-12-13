@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { faUserCircle, faFire, faMessage, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as client from "../Search/client.js"
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
+import Modal from 'react-bootstrap/Modal';
 
 function Feed() {
     const { search } = useParams();
@@ -13,6 +16,29 @@ function Feed() {
     const [posts, setPosts] = useState(null);
 
     const navigate = useNavigate();
+
+    const [commentsData, setCommentsData] = useState({});
+    const [openComments, setOpenComments] = useState({});
+
+    const toggleComments = (postId) => {
+        console.log(postId);
+        setOpenComments(prevOpen => ({
+            ...prevOpen,
+            [postId]: !prevOpen[postId]
+        }));
+    };
+
+const fetchAndToggleComments = async (postId) => {
+    if (!commentsData[postId]) {
+        const comments = await client.getCommentsFromPost(postId);
+        console.log(comments);
+        setCommentsData(prevComments => ({
+            ...prevComments,
+            [postId]: comments
+        }));
+    }
+    toggleComments(postId);
+};
 
     const allPosts = async () => {
         const posts = await client.getAllPosts();
@@ -101,7 +127,7 @@ function Feed() {
                                     <p className='fw-normal py-2'><b>Song Name:{post.songId}</b></p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
-                                    <button
+                                    <Button
                                         onClick={() => {
                                             if (fetchLoggedInAccount() === null) {
                                                 navigate("/");
@@ -113,14 +139,42 @@ function Feed() {
                                             }
                                         }}>
                                         <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
-                                    </button>
-                                    <button>
+                                    </Button>
+                                    <Button 
+                                    onClick={() => fetchAndToggleComments(post._id)}
+                                    aria-controls={`comments-collapse-${post._id}`}
+                                    aria-expanded={openComments[post._id]} >
                                         <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
                         </div>   
+                        <Collapse in={openComments[post._id]}>
+                                <div className='card feed-card' id="example-collapse-text">
+                                {commentsData[post._id] && commentsData[post._id].map((comment) => (
+                                    <div className='row justify-content-center'>            
+                                        <div className='col-3 pt-3'>
+                                            <FontAwesomeIcon className="user-icon-comment" icon={faUserCircle}>
+                                            </FontAwesomeIcon>
+                                        </div>
+                                        <div className='col-8'>
+                                            <div className='row justify-content-between py-3'>
+                                                
+                                                <div key={comment._id}>
+                                                <p className='col text-start'>@{comment.commenterId}</p>
+                                                <h6 className='col text-end'>Posted on: {comment.timestamp}</h6>
+                                                
+                                                </div>
+                                                </div>
+                                            <div className='row text-start py-3'>
+                                                <p className='fw-normal'>{comment.content}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ))}
+                                </div> 
+                            </Collapse> 
                     </li>   
                     ))}       
                 </ul>
