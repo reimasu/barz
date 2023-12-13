@@ -95,6 +95,7 @@ function Feed() {
                                 </div>
                                 <div className='row text-start py-3'>
                                     <p className='fw-normal'>“{post.caption}”</p>
+                                    <p className='fw-normal py-2'><b>Song Name:{post.songId}</b></p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
                                     <button
