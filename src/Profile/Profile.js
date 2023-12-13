@@ -34,7 +34,7 @@ function Profile() {
     }
 
     const isCurrentUser = () => {
-        if ( user._id === currentUser2._id) {
+        if ( user === currentUser2) {
             setCurrentUser2(true);
         } else {
             setCurrentUser2(false);
