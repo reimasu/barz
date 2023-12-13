@@ -62,11 +62,19 @@ function Followers() {
         fetchFollowers();
     }, []);
 
-    return (        
-        <div>           
-         <h3 className='headings'>{followers.length} Followers</h3>
+    return (                      
+        <div className=" d-flex flex-col profile-container">
+        <div >
+            <NavBarVer />
+        </div>
+        <div className='container m-0 profile-info-container'>
+            <div className="row align-items-end">
+                <NavBarHor />
+            </div>   
+        <div className='row pt-3 px-5'>        
+        <div className="col">
+                     <h3 className='headings'>{followers.length} Followers</h3>
 
-                        <h3 className='headings'>4 Followers</h3>
 
                         <hr />
                         <div className="row w-100 py-3 pe-3">
@@ -89,6 +97,9 @@ function Followers() {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
     )
 }
 
