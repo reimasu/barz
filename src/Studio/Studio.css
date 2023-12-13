@@ -1,0 +1,19 @@
+.explore-container p {
+    color: black;
+}
+
+.studio-button {
+    background-color: #FF5D39;
+    border: 1px solid black;
+    border-radius: 0;
+}
+
+.studio-button:hover {
+    background-color: lightgray;
+    border: 1px solid black;
+}
+
+.sharp-border {
+    border-radius: 0;
+    border: 1px solid black;
+}
