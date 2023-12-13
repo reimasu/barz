@@ -57,7 +57,8 @@ function Feed() {
                                     <h6 className='col text-end'>Posted on: {time(post.timestamp)}</h6>
                                 </div>
                                 <div className='row text-start py-3'>
-                                    <p className='fw-normal'>“{post.lyric}”</p>
+                                    <p className='fw-normal'>“{post.caption}”</p>
+                                    <p className='fw-normal py-2'><b>Song Name:{post.songId}</b></p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
                                     <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
