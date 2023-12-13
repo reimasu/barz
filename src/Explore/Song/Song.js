@@ -28,6 +28,8 @@ function Song() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [open, setOpen] = useState(false);
+    const [posts, setPosts] = useState(null);
+    const [comments, setComments] = useState(null);
 
     const navigate = useNavigate();
 
@@ -69,13 +71,26 @@ function Song() {
         await client.createPost(postInfo);
     };
 
+    const fetchPosts = async () => {
+        const posts = await client.getPostsFromSong(songResultId);
+        setPosts(posts);
+    }
+
+    const fetchComments = async (postId) => {
+        const comments = await client.getCommentsFromPost(postId);
+        setComments(comments);
+    }
+
     useEffect(() => {
         fetchSongTitle(songResultId);
         fetchSongCover(songResultId);
         fetchAlbumName(songResultId);
         fetchLoggedInAccount();
+        fetchPosts();
     }, []);
 
+    const objPosts = JSON.parse(JSON.stringify(posts));
+    const objComments = JSON.parse(JSON.stringify(comments));
 
     return(
         <div className='d-flex flex-column explore-container ps-5'>
@@ -140,7 +155,9 @@ function Song() {
                 </div>
                 <div className="col">
                 <ul>
-                    <li className="list-group-item py-2">
+                {objPosts &&
+                        objPosts.map((post, index) => (
+                    <li key={index} className="list-group-item py-2">
                         <div className='card feed-card'>
                             <div className='row justify-content-center'>            
                                 <div className='col-3 pt-3'>
@@ -149,14 +166,19 @@ function Song() {
                                 </div>
                             <div className='col-8'>
                                 <div className='row justify-content-between py-3'>
-                                    <p className='col text-start'>@meow</p>
-                                    <h6 className='col text-end'>Posted on:</h6>
+                                    <p className='col text-start'>@{post.username}</p>
+                                    <h6 className='col text-end'>Posted on: {post.timestamp}</h6>
                                 </div>
                                 <div className='row text-start py-3'>
-                                    <p className='fw-normal'>“lyrics”</p>
+                                    <p className='fw-normal'>{post.caption}</p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
-                                    <Button className="p-0 pe-3 comment-icon" onClick={() => setOpen(!open)}
+                                    <Button className="p-0 pe-3 comment-icon" 
+                                    onClick={() => {
+                                        fetchComments(post._id);
+                                        console.log(comments);
+                                        setOpen(!open);
+                                    }}
                                                      aria-controls="example-collapse-text"
                                                      aria-expanded={open}>
                                     <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faMessage}></FontAwesomeIcon>
@@ -165,10 +187,10 @@ function Song() {
                                 </div>
                             </div>
                             </div>
-                        </div>   
-                        </li>
-                        <ul >
-                            <Collapse in={open}>
+                        </div>
+                        {objComments &&
+                        objComments.map((comment) => (
+                        <Collapse in={open}>
                                 <div className='card feed-card' id="example-collapse-text">
                                     <div className='row justify-content-center'>            
                                         <div className='col-3 pt-3'>
@@ -177,17 +199,18 @@ function Song() {
                                         </div>
                                         <div className='col-8'>
                                             <div className='row justify-content-between py-3'>
-                                                <p className='col text-start'>@meow</p>
-                                                <h6 className='col text-end'>Posted on:</h6>
+                                                <p className='col text-start'>@{comment.commenterId}</p>
+                                                <h6 className='col text-end'>Posted on: {comment.timestamp}</h6>
                                             </div>
                                             <div className='row text-start py-3'>
-                                                <p className='fw-normal'>“lyrics”</p>
+                                                <p className='fw-normal'>{comment.content}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div> 
-                            </Collapse>   
-                        </ul>   
+                            </Collapse> ))} 
+                        </li>
+                        ))} 
                     </ul>
                     
                 </div>

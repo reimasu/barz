@@ -9,7 +9,7 @@ import LandingPage from "../LandingPage/LandingPage.js";
 
 function NavBar() {
     const icons = [faHouse, faMagnifyingGlass];
-    const links = ["Home", "Explore"];
+    const links = ["Feed", "Explore"];
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
@@ -38,6 +38,20 @@ function NavBar() {
                     {link}
                     </Link>
                 ))}
+                <Link
+                    onClick = {() => {
+                        if (fetchLoggedInAccount() === null) {
+                            navigate("/");
+                        }
+                    }}
+                    to={`/Barz/Profile`}
+                    className={`nav-links list-group-item nav-item d-flex flex-row
+                    justify-content-left align-middle text-nowrap py-3 pe-3 ${pathname.includes("Profile") && "active"}`}>
+                    <FontAwesomeIcon className="fa-sm align-self-center px-4" icon={faUserCircle} >
+                    </FontAwesomeIcon>
+                    Profile
+                </Link>
+
                 <button>
                     <Link
                         onClick = {() => {
