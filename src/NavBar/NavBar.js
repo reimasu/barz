@@ -18,18 +18,21 @@ function NavBar() {
     const fetchLoggedInAccount = async () => {
         const currentUser = await client.getLoggedInUser();
         setCurrentUser(currentUser);
+        console.log(currentUser);
     }
 
     const validUser = () => {
-        if (currentUser.artist) {
+        if (currentUser.artist===true) {
+            console.log(currentUser.artist);
             setBoolean(true); 
         } else {
+            console.log(currentUser.artist);
             setBoolean(false);
         } 
     }
 
     const isGuest = () => {
-        if (currentUser === undefined) {
+        if (currentUser === null) {
             setBooleanGuest(true);
         } else {
             setBooleanGuest(false);
@@ -43,6 +46,7 @@ function NavBar() {
     }, [booleanVar, booleanGuest])
 
     {console.log(booleanGuest)}
+    {console.log(booleanVar)}
     return(
         <div className="d-flex flex-column">  
             <div className="align-self-center py-4">
