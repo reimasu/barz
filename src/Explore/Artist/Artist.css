@@ -5,4 +5,46 @@
 
 .artist-cover {
    max-width: 300px;
+   border: 1px solid #000;
+   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.song-album-covers {
+    width: 100px;
+}
+
+.song-card {
+    border: 1px solid #000;
+    background: #FF5D39;
+    border-radius: 0;
+}
+
+.song-link h4 {
+    color: #000;
+    font-family: Anonymous Pro;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.song-link p {
+    color: #4D4D4D;
+    font-family: Anonymous Pro;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.song-link {
+    text-decoration: none;
+}
+
+.song-link:hover {
+    color: #000;
+    font-family: Anonymous Pro;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
 }

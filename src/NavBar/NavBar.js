@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css'
 
 function NavBar() {
-    const icons = [faHouse, faMagnifyingGlass, faBell, faList, faUserCircle];
-    const links = ["Home", "Explore", "Notifications", "Lists", "Profile"];
+    const icons = [faHouse, faMagnifyingGlass, faUserCircle];
+    const links = ["Home", "Explore", "Profile"];
     const { pathname } = useLocation();
 
     return(

@@ -51,3 +51,12 @@
     color: black;
     border-radius: 0;
 }
+
+.comment-icon {
+    background-color: transparent;
+    border: none;
+}
+
+.comment-icon:hover {
+    background-color: transparent;
+}

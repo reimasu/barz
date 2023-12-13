@@ -17,10 +17,10 @@ function Explore() {
     const obj = JSON.parse(JSON.stringify(results));
 
     return(
-        <div className='d-flex flex-column explore-container ps-5'>
-            <h3 className='headings'>Explore BARZs</h3>
+        <div className='d-flex flex-column explore-container px-5'>
+            <h3 className='headings pt-3'>Explore BARZs</h3>
             <hr/>
-            <div className='grid'>
+            <div className='grid ps-4 pt-3'>
                 <div className='row'>
                     <div className="col-3 ps-2">
                         <input type="text"
@@ -36,7 +36,7 @@ function Explore() {
                           }}/>  
                     </div>
                 </div>
-                <div className="row">
+                <div className="row py-3">
                     <h3 className="headings">Artists</h3>
                     <ul className="list-group d-flex flex-row flex-wrap">
                         {obj &&
@@ -50,9 +50,8 @@ function Explore() {
                                 </li>
                         ))}
                     </ul>
-                    <p>{console.log(obj)}</p>
                 </div>
-                <div className="row">
+                <div className="row py-3">
                     <h3 className="headings">Songs</h3>
                     <ul className="list-group d-flex flex-row flex-wrap">
                         {obj &&
@@ -66,6 +65,21 @@ function Explore() {
                             </li>
                         ))}
                     </ul>
+                </div>
+                <div className="row py-3">
+                    <h3 className="headings">Users</h3>
+                    {/* <ul className="list-group d-flex flex-row flex-wrap">
+                        {obj &&
+                        obj.map((song, index) => (
+                            <li key={index} className="list-group-item">
+                                <Link to={`Song/${song.result.id}`}>
+                                    <img
+                                        className="search-song-cover"
+                                        src={song.result.song_art_image_url}></img>
+                                </Link>
+                            </li>
+                        ))}
+                    </ul> */}
                 </div>
             </div>
         </div>

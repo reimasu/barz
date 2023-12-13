@@ -7,7 +7,7 @@ h6 {
     line-height: normal;
 }
 .feed-grid {
-    grid-template-columns: 70% auto;
+    width: 100%;
 }
 
 .feed-card p {
@@ -51,4 +51,12 @@ h6 {
 
 .feed-grid .search-bar {
     width: 100%;
+}
+
+.user-icon {
+    height: 80px;
+}
+
+.user-icon-comment {
+    height: 50px;
 }
