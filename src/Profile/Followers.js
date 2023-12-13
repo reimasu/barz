@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
-import React, { useState } from "react";
+
+import './Profile.css'
+import React, { useState, useEffect } from "react";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Profile.css';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
@@ -7,32 +10,62 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NavBarHor from '../ProfileNavBar/NavBarHor';
 import NavBarVer from '../ProfileNavBar/NavBarVer';
 import { Card } from "react-bootstrap";
-// import * as client from "./LoginPage/client"; // will add this when we connect to node
+import * as client from "./client";
 
 function Followers() {
 
-    const [credentials, setCredentials] = useState({
-        username: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        artist: false
-    });
+    // **functions i added in followers card that i ref here:**
+    // const [followers, setFollowers] = useState([]); //holding an array of followers for currentUser
+    // const [username, setUsername] = useState('');
 
-    return (
+    // useEffect(() => {
+    //     const fetchLoggedInAccount = async () => {
+    //         try {
+    //             const currentUser = await client.getLoggedInUser();
+    //             if (currentUser) {
+    //                 setUsername(currentUser.username);
+    //                 const fetchedFollowers =
+    //                     await client.findFollowsByFollowerId
+    //                         (currentUser.followerId); // getting the followerId from the current user
+    //                 setFollowers(fetchedFollowers);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error getting current users followers:', error);
+    //         }
+    //     };
+    //     fetchLoggedInAccount();
+    // },
+    // const deleteFollow = async (followId) => {
+    //     try {
+    //         await client.deleteFollow(followId);
+    //         setFollowers(followers.filter((f) => f._id !== followId));
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
 
-        <div className="d-flex flex-col profile-container">
-            <div >
-                <NavBarVer />
-            </div>
-            <div className='container m-0 profile-info-container'>
-                <div className="row align-items-end">
-                    <NavBarHor />
-                </div>
-                <div className='row pt-3 px-5'>
-                    <div className="col">
+    const [user, setUser] = useState(null);
+    const [followers, setFollowers] = useState([]);
+
+    useEffect(() => {
+        const fetchFollowers = async () => {
+            try {
+                // Fetch the logged-in user's followers
+                const loggedInAccount = await client.getLoggedInUser();
+                const fetchedFollowers = await client.findFollowsByFollowerId(loggedInAccount.followerId);
+                setFollowers(fetchedFollowers);
+            } catch (error) {
+                console.error('Error fetching followers:', error);
+            }
+        };
+
+        fetchFollowers();
+    }, []);
+
+    return (                      <h3 className='headings'>{followers.length} Followers</h3>
+
                         <h3 className='headings'>4 Followers</h3>
+
                         <hr />
                         <div className="row w-100 py-3 pe-3">
                             <div className='grid'>
@@ -61,3 +94,4 @@ function Followers() {
 }
 
 export default Followers;
+

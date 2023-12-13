@@ -6,7 +6,9 @@ import './NavBar.css'
 
 function NavBarHor() {
     const icons = [, , faUserCircle]; 
-    const links = ["Home", "Explore", ""]; 
+
+    const links = ["Feed", "Search", ""]; 
+
     const { pathname } = useLocation(); 
     
 

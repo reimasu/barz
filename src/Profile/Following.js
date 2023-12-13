@@ -11,7 +11,6 @@ import { Card } from "react-bootstrap";
 import * as client from "../Profile/client";
 
 
-
 function Following() {
     const [followIds, setFollowIds] = useState([]);
     const [followId, setfollowId] = useState({ 
@@ -40,6 +39,8 @@ function Following() {
                         <h3 className='headings'>4 Following</h3>
                         <hr />
                         <div className="row w-100 py-3 pe-3">
+
+                    
                             <div className='grid'>
                                 <Card className="followers-card">
                                     <Card.Body className="card-body">
@@ -58,6 +59,7 @@ function Following() {
                                     </Card.Body>
                                 </Card>
                             </div>
+
                         </div>
                     </div>
                 </div>

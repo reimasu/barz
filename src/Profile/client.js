@@ -10,6 +10,12 @@ export const deleteFollow = async (followId) => {
     return response.data;
   };
 
+  export const findFollowsByFollowerId = async (followerId) => {
+    const response = await axios.get(
+      `${FOLLOW_API}/follower/${followerId}`, followerId);
+    return response.data;
+  };
+
   export const getUserById = async (user) => {
     const response = await axios.get(`${USERS_API}/${user}`);
     return response.data;
@@ -17,11 +23,16 @@ export const deleteFollow = async (followId) => {
   export const profile = async () => {
     const response = await axios.post(`${USERS_API}/profile`);
     return response.data;
-}; // not using this anywhere it does same thing as getUserById
+};
 
 export const updateUser = async (user) => {
   const response = await axios.put(`${USERS_API}/${user._id}`, user);
   return response.data;
+};
+
+export const getLoggedInUser = async () => {
+    const response = await axios.post(`${USERS_API}/profile`);
+    return response.data;
 };
 
   
