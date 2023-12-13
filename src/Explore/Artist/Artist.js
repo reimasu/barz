@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import React, {useState, useEffect} from "react";
 import * as client from "../../Search/client";
+import Card from 'react-bootstrap/Card';
 import './Artist.css';
   
 function Artist() {  
@@ -35,26 +36,32 @@ function Artist() {
 
     return (
     <div className='d-flex flex-column explore-container ps-5'>
-            <h3 className='headings'>{artistName}</h3>
+            <h3 className='headings pt-3'>{artistName}</h3>
             <hr/> 
-            <div className="grid">
+            <div className="grid ps-4 pt-3">
                 <div className="row">
                     <div className="col">
                         <div className="row">
                             <img src={artistCover}
-                                className="artist-cover col"></img>
+                                className="artist-cover col p-0"></img>
                             <h3 className="text-start col">{artistName}</h3>
                         </div>
                     </div>
                     <div className="col">
-                        <h4>Popular Songs by {artistName}</h4>
-                        <ul className="list-group">
+                        <h4 className="text-start">Popular Songs by {artistName}</h4>
+                        <ul className="list-group align-items-start pt-3">
                             {obj &&
                              obj.map((song, index) => (
                                 <li key={index} className="list-group-item">
-                                    <Link to={`/Barz/Explore/Song/${song.result.id}`}>
-                                        <p>{song.result.full_title}</p>
-                                    </Link>
+                                    <div className="card song-card">
+                                        <div className="d-inline-flex">
+                                            <img className="song-album-covers" src={song.result.song_art_image_url}></img>
+                                                <Link className="song-link" to={`/Barz/Explore/Song/${song.result.id}`}>
+                                                    <h4 className="px-3 pt-2 text-start">{song.result.full_title}</h4>
+                                                    <p className="text-start px-3">{song.result.release_date_with_abbreviated_month_for_display}</p>
+                                                </Link>
+                                        </div>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

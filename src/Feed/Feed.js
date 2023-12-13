@@ -36,9 +36,9 @@ function Feed() {
     const objPosts = JSON.parse(JSON.stringify(posts));
 
     return(
-        <div className="container feed-grid ps-1">
+        <div className="feed-grid px-5 m-0">
             <div className='row pt-3'>
-            <div className='col-9'>
+            <div className='col'>
                 <h3 className='headings'>Your Feed</h3>
                 <hr/>
                 <ul>
@@ -46,9 +46,9 @@ function Feed() {
                         objPosts.map((post, index) => (
                     <li className="list-group-item py-2" key={index}>
                         <div className='card feed-card'>
-                            <div className='row'>            
-                                <div className='col-2 pt-3'>
-                                    <FontAwesomeIcon className="fa-2xl" icon={faUserCircle}>
+                            <div className='row justify-content-center'>            
+                                <div className='col-1 pt-3 px-0'>
+                                    <FontAwesomeIcon className="user-icon" icon={faUserCircle}>
                                     </FontAwesomeIcon>
                                 </div>
                             <div className='col-8'>
@@ -62,7 +62,6 @@ function Feed() {
                                 <div className='row-3 justify-content-end text-end pb-3'>
                                     <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
                                     <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
-                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faPlus}></FontAwesomeIcon>
                                 </div>
                             </div>
                         </div>
@@ -70,10 +69,6 @@ function Feed() {
                     </li>   
                     ))}       
                 </ul>
-                <p>{console.log(objPosts)}</p>
-            </div>
-            <div className='col pt-3'>
-                <p>put trending songs here</p>
             </div>
             </div>
         </div>

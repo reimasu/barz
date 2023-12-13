@@ -20,6 +20,7 @@ function Song() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [open, setOpen] = useState(false);
 
     const fetchSongTitle = async () => {
         const title = await client.getSongTitle(songResultId);
@@ -46,9 +47,9 @@ function Song() {
 
     return(
         <div className='d-flex flex-column explore-container ps-5'>
-        <h3 className='headings'>{title}</h3>
+        <h3 className='headings pt-3'>{title}</h3>
         <hr/>
-        <div className="grid ps-4">
+        <div className="grid ps-4 pt-3">
             <div className="row">
                 <div className="col">
                     <div className="row justify-content-start">
@@ -62,7 +63,7 @@ function Song() {
                     </div>
                     <div className="row pt-3">
                         <Button
-                            className="col-2 d-inline-flex gap-3 justify-content-center align-items-center make-barz-button"
+                            className="col-4 d-inline-flex gap-3 justify-content-center align-items-center make-barz-button"
                             onClick={handleShow}
                             variant="primary">
                             <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
@@ -90,9 +91,9 @@ function Song() {
                 <ul>
                     <li className="list-group-item py-2">
                         <div className='card feed-card'>
-                            <div className='row'>            
-                                <div className='col-2 pt-3'>
-                                    <FontAwesomeIcon className="fa-2xl" icon={faUserCircle}>
+                            <div className='row justify-content-center'>            
+                                <div className='col-3 pt-3'>
+                                    <FontAwesomeIcon className="user-icon" icon={faUserCircle}>
                                     </FontAwesomeIcon>
                                 </div>
                             <div className='col-8'>
@@ -104,15 +105,40 @@ function Song() {
                                     <p className='fw-normal'>“lyrics”</p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
-                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faFire}></FontAwesomeIcon>
-                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
-                                    <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faPlus}></FontAwesomeIcon>
+                                    <Button className="p-0 pe-3 comment-icon" onClick={() => setOpen(!open)}
+                                                     aria-controls="example-collapse-text"
+                                                     aria-expanded={open}>
+                                    <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faMessage}></FontAwesomeIcon>
+                                    </Button>
+                                    <FontAwesomeIcon className="fa-2xl orange-icon p-0 " icon={faFire}></FontAwesomeIcon>
                                 </div>
                             </div>
-                        </div>
+                            </div>
                         </div>   
-                    </li>      
+                        </li>
+                        <ul >
+                            <Collapse in={open}>
+                                <div className='card feed-card' id="example-collapse-text">
+                                    <div className='row justify-content-center'>            
+                                        <div className='col-3 pt-3'>
+                                            <FontAwesomeIcon className="user-icon-comment" icon={faUserCircle}>
+                                            </FontAwesomeIcon>
+                                        </div>
+                                        <div className='col-8'>
+                                            <div className='row justify-content-between py-3'>
+                                                <p className='col text-start'>@meow</p>
+                                                <h6 className='col text-end'>Posted on:</h6>
+                                            </div>
+                                            <div className='row text-start py-3'>
+                                                <p className='fw-normal'>“lyrics”</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </Collapse>   
+                        </ul>   
                     </ul>
+                    
                 </div>
             </div>
         </div>

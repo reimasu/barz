@@ -11,8 +11,6 @@ import Followers from "./Profile/Followers.js";
 import Following from "./Profile/Following";
 import './App.css';
 
-// import Store from "./Store";
-
 function App() {
 
   return (
