@@ -60,6 +60,7 @@ function NavBar() {
                     {link}
                     </Link>
                 ))}
+                {booleanGuest ? (
                     <Link
                         to={`/`}
                         className={`nav-links list-group-item nav-item d-flex flex-row
