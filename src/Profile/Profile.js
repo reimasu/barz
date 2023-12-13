@@ -14,6 +14,8 @@ function Profile() {
     const [user, setUser] = useState(null);
     const { userId } = useParams();
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState(false);
+    const [currentUser2, setCurrentUser2] = useState([]);
 
 
     const getUserById = async (id) => {
@@ -26,6 +28,19 @@ function Profile() {
         setUser(userProfile);
     };
 
+    const fetchLoggedInAccount = async () => {
+        const currentUser = await client.getLoggedInUser();
+        setCurrentUser(currentUser);
+    }
+
+    const isCurrentUser = () => {
+        if ( user._id === currentUser2._id) {
+            setCurrentUser2(true);
+        } else {
+            setCurrentUser2(false);
+        }
+    }
+
     useEffect(() => {
         if (userId) {
             getUserById(userId);
@@ -33,6 +48,8 @@ function Profile() {
         else {
             fetchProfile();
         }
+        isCurrentUser();
+        fetchLoggedInAccount();
     }, []);
 
     const save = async () => {
@@ -46,7 +63,8 @@ function Profile() {
 
 
     return (
-
+        <>
+        {isCurrentUser ? (
         <div className="d-flex flex-col profile-container">
             <div>
                 <NavBarVer />
@@ -97,7 +115,7 @@ function Profile() {
                                     email: e.target.value
                                 })} />
                             <label htmlFor="role" className="form-label">User Role</label>
-                            <select id="role" className="form-control" onChange={(e) => setUser({
+                            <select id="role" value={user.artist ? "ARTIST" : "USER"} className="form-control" onChange={(e) => setUser({
                                 ...user,
                                 artist: e.target.value === "ARTIST"
                             })}>
@@ -126,14 +144,46 @@ function Profile() {
                             </div> */}
                         </div>)}
                     </div>
-
                 </div>
                     
-                </div>
+            </div>
+        </div>
+        ) : (
+            <div className=" d-flex flex-col profile-container">
+            <div>
+                <NavBarVer />
+            </div>
+            <div className='container m-0 profile-info-container'>
+                <div className='row align-items-end'>
+                    <div className="row align-items-end">
+                        <NavBarHor />
+                    </div>
+                    <div className=" col-2 w-75">
+                        <div>
+                            <div>
+                                <FontAwesomeIcon className="fa-10x" icon={faUserCircle}>
+                                </FontAwesomeIcon>
+                            </div>
+                            <p>Username: {user.username}</p>
 
+                            <button type="button" className='edit-btn'
+                                >Follow</button>
+
+                            <button type="button" className='edit-btn'
+                                >Report</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
-    )
+        )
+    }
+
+    </>
+        )
 }
 
 export default Profile;

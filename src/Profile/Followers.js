@@ -47,6 +47,7 @@ function Followers() {
             }
         };
 
+
         const deleteFollow = async (followId) => {
             try {
                 await client.deleteFollow(followId);
