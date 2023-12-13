@@ -13,7 +13,7 @@ function FilterNav() {
 
       <NavBar /> 
         <Routes>
-          <Route path="/Barz/Home" element={<Feed/>}/>
+          <Route path="/Barz/Feed" element={<Feed/>}/>
           <Route path="/Barz/Explore" element={<Explore/>}/>
           <Route path="/Barz/Explore/Song/:songResultId" element={<Song/>}/>
           <Route path="/Barz/Explore/Artist/:artistResultId" element={<Artist/>}/>
