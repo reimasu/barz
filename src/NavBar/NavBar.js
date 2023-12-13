@@ -21,16 +21,6 @@ function NavBar() {
         console.log(currentUser);
     }
 
-    const validUser = () => {
-        if (currentUser.artist===true) {
-            console.log(currentUser.artist);
-            setBoolean(true); 
-        } else {
-            console.log(currentUser.artist);
-            setBoolean(false);
-        } 
-    }
-
     const isGuest = () => {
         if (currentUser === null) {
             setBooleanGuest(true);
@@ -38,15 +28,24 @@ function NavBar() {
             setBooleanGuest(false);
         }
     }
+
+    const validUser = () => {
+        if (!isGuest && currentUser.artist === true) {
+            setBoolean(true); 
+        } else {
+            setBoolean(false);
+        } 
+    }
+
+
     {console.log(JSON.parse(JSON.stringify(currentUser)))}
     useEffect(() => {
         fetchLoggedInAccount();
         validUser();
         isGuest();
-    }, [booleanVar, booleanGuest])
+    }, [currentUser, booleanVar, booleanGuest])
 
-    {console.log(booleanGuest)}
-    {console.log(booleanVar)}
+
     return(
         <div className="d-flex flex-column">  
             <div className="align-self-center py-4">

@@ -4,6 +4,8 @@ import './Feed.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { faUserCircle, faFire, faMessage, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Button from 'react-bootstrap/Button';
+
 import * as client from "../Search/client.js"
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
@@ -128,6 +130,7 @@ const fetchAndToggleComments = async (postId) => {
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
                                     <Button
+                                        className="p-0 pe-3 comment-icon"
                                         onClick={() => {
                                             if (fetchLoggedInAccount() === null) {
                                                 navigate("/");
@@ -143,7 +146,8 @@ const fetchAndToggleComments = async (postId) => {
                                     <Button 
                                     onClick={() => fetchAndToggleComments(post._id)}
                                     aria-controls={`comments-collapse-${post._id}`}
-                                    aria-expanded={openComments[post._id]} >
+                                    aria-expanded={openComments[post._id]} 
+                                    className="p-0 pe-3 comment-icon">
                                         <FontAwesomeIcon className="fa-xl col-1 orange-icon" icon={faMessage}></FontAwesomeIcon>
                                     </Button>
                                 </div>
