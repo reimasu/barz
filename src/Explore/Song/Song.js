@@ -13,7 +13,14 @@ import './Song.css'
 
 function Song() {
     const {songResultId} = useParams();
-    const [results, setResults] = useState(null);
+    const randomID = Math.floor(Math.random() * 10000) + 1;
+    const [postInfo, setPostInfo] = useState({
+        _id: randomID.toString(),
+        username: "", 
+        songId: songResultId, 
+        caption: "", 
+        lyric: "None",  
+        timestamp: Date()});
     const [title, setTitle] = useState([]);
     const [albumCover, setAlbumCover] = useState([]);
     const [albumName, setAlbumName] = useState([]);
@@ -27,6 +34,16 @@ function Song() {
         setTitle(title);
     }
 
+    const setUsername = (username) => setPostInfo({
+        ...postInfo,
+        username: username });
+
+    const fetchLoggedInAccount = async () => {
+        const currentUser = await client.getLoggedInUser();
+        setUsername(currentUser.username);
+        console.log(currentUser);
+    }
+
     const fetchSongCover = async () => {
         const albumCover = await client.getSongCover(songResultId);
         setAlbumCover(albumCover)
@@ -37,11 +54,20 @@ function Song() {
         setAlbumName(albumName)
     }
     
+    const setDate = () => setPostInfo({
+        ...postInfo,
+        timestamp: Date() });
+
+    const createPost = async () => {
+        setDate();
+        await client.createPost(postInfo);
+    };
 
     useEffect(() => {
         fetchSongTitle(songResultId);
         fetchSongCover(songResultId);
         fetchAlbumName(songResultId);
+        fetchLoggedInAccount();
     }, []);
 
 
@@ -74,13 +100,27 @@ function Song() {
                             <Modal.Title><p>Create a Bar for <b>{title}</b></p></Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <input type="text" class="form-control" placeholder="Write your fire Bar..."/>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Write your fire Bar..."
+                                    value = {postInfo.caption} 
+                                    onChange= {(e) => setPostInfo({
+                                        ...postInfo,
+                                        caption: e.target.value })}
+                                />
                             </Modal.Body>
                             <Modal.Footer>
                             <Button className="close-barz-button" variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-                            <Button className="make-barz-button" variant="primary" onClick={handleClose}>
+                            <Button 
+                                className="make-barz-button" 
+                                variant="primary" 
+                                onClick={() => {
+                                    createPost();
+                                    handleClose();
+                                 }}>
                                 Create Bar
                             </Button>
                             </Modal.Footer>
