@@ -41,7 +41,7 @@ function Profile() {
 
     const signout = async () => {
         await client2.signout();
-        navigate("../LandingPage");
+        navigate("/");
     };
 
 

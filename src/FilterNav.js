@@ -7,6 +7,7 @@ import Profile from "./Profile/Profile";
 import './FilterNav.css';
 import Song from "./Explore/Song/Song";
 import Artist from "./Explore/Artist/Artist";
+import Studio from "./Studio/Studio";
 function FilterNav() {
   return (
     <div className="filterNav">
@@ -16,6 +17,7 @@ function FilterNav() {
           <Route path="/Barz/Explore" element={<Explore/>}/>
           <Route path="/Barz/Explore/Song/:songResultId" element={<Song/>}/>
           <Route path="/Barz/Explore/Artist/:artistResultId" element={<Artist/>}/>
+          <Route path="/Barz/Studio" element={<Studio/>}/>
         </Routes>
     </div>
   );
