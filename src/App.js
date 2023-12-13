@@ -22,6 +22,10 @@ function App() {
           <Route index element={<LandingPage/>}/>
           <Route path="/signup"    element={<SignUp/>}/>
           <Route path="/signin"    element={<SignIn/>}/>
+          <Route path="/Barz/Profile/:userId"    element={<Profile/>}/>
+          <Route path="/Barz/Your-Barz/:userId" element={<YourBarz/>}/>
+          <Route path="/Barz/Followers/:userId" element={<Followers/>}/>
+          <Route path="/Barz/Following/:userId" element={<Following/>}/>
           <Route path="/Barz/Profile"    element={<Profile/>}/>
           <Route path="/Barz/Your-Barz" element={<YourBarz/>}/>
           <Route path="/Barz/Followers" element={<Followers/>}/>
