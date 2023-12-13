@@ -173,6 +173,39 @@ function Song() {
                                     <p className='fw-normal'>{post.caption}</p>
                                 </div>
                                 <div className='row-3 justify-content-end text-end pb-3'>
+                                    <Button className="p-0 pe-3 comment-icon" onClick={handleShow()}>
+                                        <FontAwesomeIcon className="fa-2xl orange-icon p-0" icon={faPlus}></FontAwesomeIcon>
+                                    </Button>
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                        <Modal.Title><p>Create a Bar for <b>{title}</b></p></Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                placeholder="Write your fire Bar..."
+                                                value = {postInfo.caption} 
+                                                onChange= {(e) => setPostInfo({
+                                                    ...postInfo,
+                                                    caption: e.target.value })}
+                                            />
+                                        </Modal.Body>
+                                    <Modal.Footer>
+                            <Button className="close-barz-button" variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            <Button 
+                                className="make-barz-button" 
+                                variant="primary" 
+                                onClick={() => {
+                                    createPost();
+                                    handleClose();
+                                 }}>
+                                Create Bar
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
                                     <Button className="p-0 pe-3 comment-icon" 
                                     onClick={() => {
                                         fetchComments(post._id);
@@ -189,9 +222,9 @@ function Song() {
                             </div>
                         </div>
                         {objComments &&
-                        objComments.map((comment) => (
+                        objComments.map((comment, index) => (
                         <Collapse in={open}>
-                                <div className='card feed-card' id="example-collapse-text">
+                                <div className='card feed-card' id="example-collapse-text" key={index}>
                                     <div className='row justify-content-center'>            
                                         <div className='col-3 pt-3'>
                                             <FontAwesomeIcon className="user-icon-comment" icon={faUserCircle}>
