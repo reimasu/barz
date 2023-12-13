@@ -20,7 +20,7 @@ export const deleteFollow = async (followId) => {
 }; // not using this anywhere it does same thing as getUserById
 
 export const updateUser = async (user) => {
-  const response = await request.put(`${USERS_API}/${user._id}`, user);
+  const response = await axios.put(`${USERS_API}/${user._id}`, user);
   return response.data;
 };
 
